@@ -45,7 +45,7 @@ class Article extends SmartArticle
     }
 
     /**
-     * @return \Acme\UserBundle\Entity\User
+     * @return \TDT\UserBundle\Entity\User
      */
     public function getUser()
     {
