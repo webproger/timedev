@@ -1,7 +1,10 @@
-{% extends '::base.html.twig' %}
+{% extends 'SmartBlogBundle::layout.html.twig' %}
 
-{% block body %}
+{% block smart_blog_content %}
 
-    {{ articles|ld }}
+    <h1>Блог</h1>
 
-{% endblock body %}
+    @todo тут будет блог.
+    {#{{ articles|ld }}#}
+
+{% endblock smart_blog_content %}

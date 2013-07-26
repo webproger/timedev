@@ -20,7 +20,15 @@ class AppKernel extends Kernel
             //new JMS\DiExtraBundle\JMSDiExtraBundle($this), "jms/di-extra-bundle": "1.3.*"
             //new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(), "jms/security-extra-bundle": "1.4.*",
             new RaulFraile\Bundle\LadybugBundle\RaulFraileLadybugBundle(),
+            new FOS\UserBundle\FOSUserBundle(),
+            new Mopa\Bundle\BootstrapBundle\MopaBootstrapBundle(),
+            new Knp\Bundle\MenuBundle\KnpMenuBundle(),
+            new SmartCore\Bundle\HtmlBundle\HtmlBundle(),
             new SmartCore\Bundle\BlogBundle\SmartBlogBundle(),
+            new TDT\SiteBundle\TDTSiteBundle(),
+            new TDT\UserBundle\TDTUserBundle(),
+            new TDT\BlogBundle\TDTBlogBundle(),
+            new TDT\FixturesBundle\TDTFixturesBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

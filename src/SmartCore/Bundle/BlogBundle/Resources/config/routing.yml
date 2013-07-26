@@ -30,6 +30,6 @@ smart_blog_archive_dayly:
     path: /archive/{year}/{month}/{day}/
     defaults: { _controller: SmartBlogBundle:Default:index }
 
-smart_blog_admin:
-    resource: "@SmartBlogBundle/Resources/config/routing_admin.yml"
-    prefix: /admin/
+#smart_blog_admin:
+#    resource: "@SmartBlogBundle/Resources/config/routing_admin.yml"
+#    prefix: /admin/

@@ -1,5 +1,11 @@
-homepage:
-    path: /
-    defaults:
-        _controller: FrameworkBundle:Template:template
-        template: '::homepage.html.twig'
+tdt_site:
+    resource: "@TDTSiteBundle/Resources/config/routing.yml"
+    prefix:   /
+
+tdt_blog:
+    resource: "@TDTBlogBundle/Resources/config/routing.yml"
+    prefix:   /blog/
+
+tdt_user:
+    resource: "@TDTUserBundle/Resources/config/routing.yml"
+    prefix:   /
