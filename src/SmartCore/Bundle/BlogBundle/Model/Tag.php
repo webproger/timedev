@@ -15,7 +15,7 @@ abstract class Tag
     protected $id;
 
     /**
-     * @ORM\Column(name="name", type="string", length=255, unique=true)
+     * @ORM\Column(type="string", unique=true)
      */
     protected $name;
 

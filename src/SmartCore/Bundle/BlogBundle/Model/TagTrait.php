@@ -7,7 +7,7 @@ trait TagTrait
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection
      * @ORM\ManyToMany(targetEntity="Tag", inversedBy="articles")
-     * @ORM\JoinTable(name="articles_tags_relations",
+     * @ORM\JoinTable(name="blog_articles_tags_relations",
      *      joinColumns={@ORM\JoinColumn(name="article_id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="tag_id")}
      * )
