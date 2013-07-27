@@ -21,6 +21,8 @@ abstract class Category
     /**
      * @ORM\OneToOne(targetEntity="Category")
      * @ORM\JoinColumn(name="pid", referencedColumnName="id")
+     *
+     * @var Category
      **/
     protected $parent;
 
@@ -44,6 +46,9 @@ abstract class Category
      */
     protected $created;
 
+    /**
+     * Constructor.
+     */
     public function __construct()
     {
         $this->articles = new ArrayCollection();
@@ -80,6 +85,7 @@ abstract class Category
     public function setName($name)
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -92,12 +98,32 @@ abstract class Category
     }
 
     /**
+     * @param Category $parent
+     * @return $this
+     */
+    public function setParent(Category $parent)
+    {
+        $this->parent = $parent;
+
+        return $this;
+    }
+
+    /**
+     * @return Category
+     */
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
+    /**
      * @param string $title
      * @return $this
      */
     public function setTitle($title)
     {
         $this->title = $title;
+
         return $this;
     }
 
@@ -116,6 +142,7 @@ abstract class Category
     public function setUriPart($uri_part)
     {
         $this->uri_part = $uri_part;
+
         return $this;
     }
 

@@ -20,19 +20,36 @@ abstract class Tag
     protected $name;
 
     /**
-     * @var ArrayCollection
-     * @ORM\ManyToMany(targetEntity="Article", mappedBy="tags")
+     * @ORM\Column(type="string", unique=true)
      */
-    protected $articles;
+    protected $title;
 
     /**
      * @ORM\Column(type="datetime")
      */
     protected $created;
 
-    public function __construct($name)
+    /**
+     * @ORM\ManyToMany(targetEntity="Article", mappedBy="tags")
+     *
+     * @var ArrayCollection
+     */
+    protected $articles;
+
+    /**
+     * Constructor.
+     *
+     * @param string $name
+     * @param string $title
+     */
+    public function __construct($name, $title = null)
     {
-        $this->name = $name;
+        if (!$title) {
+            $title = $name;
+        }
+
+        $this->name = strtolower($name);
+        $this->title = $title;
         $this->articles = new ArrayCollection();
         $this->created = new \DateTime();
     }
@@ -54,6 +71,22 @@ abstract class Tag
     }
 
     /**
+     * @return Article[]
+     */
+    public function getArticles()
+    {
+        return $this->articles;
+    }
+
+    /**
+     * @return \Datetime
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
      * @param string $name
      * @return $this
      */
@@ -72,18 +105,21 @@ abstract class Tag
     }
 
     /**
-     * @return Article[]
+     * @param string $title
+     * @return $this
      */
-    public function getArticles()
+    public function setTitle($title)
     {
-        return $this->articles;
+        $this->title = $title;
+
+        return $this;
     }
 
     /**
-     * @return \Datetime
+     * @return string
      */
-    public function getCreated()
+    public function getTitle()
     {
-        return $this->created;
+        return $this->title;
     }
 }

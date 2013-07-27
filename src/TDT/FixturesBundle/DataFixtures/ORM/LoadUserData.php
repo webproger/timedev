@@ -3,13 +3,13 @@
 namespace TDT\FixturesBundle\ORM;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\ContainerAware;
 use TDT\UserBundle\Entity\User;
 use TDT\UserBundle\Entity\Group;
 
-class LoadUserData extends ContainerAware implements FixtureInterface
+class LoadUserData extends ContainerAware implements FixtureInterface, OrderedFixtureInterface
 {
     /**
      * {@inheritDoc}
@@ -41,5 +41,13 @@ class LoadUserData extends ContainerAware implements FixtureInterface
         $manager->persist($user);
 
         $manager->flush();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getOrder()
+    {
+        return 1;
     }
 }

@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use SmartCore\Bundle\BlogBundle\Model\Article as SmartArticle;
 use SmartCore\Bundle\BlogBundle\Model\CategoryTrait;
 use SmartCore\Bundle\BlogBundle\Model\TagTrait;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity
@@ -21,26 +22,27 @@ class Article extends SmartArticle
     use TagTrait;
 
     /**
-     * @ORM\OneToOne(targetEntity="TDT\UserBundle\Entity\User")
-     * @ORM\JoinColumn(name="user_id")
+     * @ORM\ManyToOne(targetEntity="TDT\UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="author_id")
      */
-    protected $user;
+    protected $author;
 
     /**
-     * @param mixed $user
+     * @param UserInterface $author
      * @return $this
      */
-    public function setUser($user)
+    public function setAuthor(UserInterface $author)
     {
-        $this->user = $user;
+        $this->author = $author;
+
         return $this;
     }
 
     /**
-     * @return \TDT\UserBundle\Entity\User
+     * @return mixed
      */
-    public function getUser()
+    public function getAuthor()
     {
-        return $this->user;
+        return $this->author;
     }
 }

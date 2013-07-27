@@ -5,12 +5,12 @@ namespace SmartCore\Bundle\BlogBundle\Model;
 trait TagTrait
 {
     /**
-     * @var \Doctrine\Common\Collections\ArrayCollection
-     * @ORM\ManyToMany(targetEntity="Tag", inversedBy="articles")
+     * @ORM\ManyToMany(targetEntity="Tag", inversedBy="articles", cascade={"persist"})
      * @ORM\JoinTable(name="blog_articles_tags_relations",
      *      joinColumns={@ORM\JoinColumn(name="article_id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="tag_id")}
      * )
+     * @var \Doctrine\Common\Collections\ArrayCollection
      */
     protected $tags;
 
@@ -21,6 +21,7 @@ trait TagTrait
     public function addTag(Tag $tag)
     {
         $this->tags[] = $tag;
+
         return $this;
     }
 
@@ -31,6 +32,7 @@ trait TagTrait
     public function removeTag(Tag $tag)
     {
         $this->tags->removeElement($tag);
+
         return $this;
     }
 

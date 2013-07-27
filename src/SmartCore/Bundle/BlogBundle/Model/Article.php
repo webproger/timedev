@@ -24,6 +24,11 @@ abstract class Article
     protected $title;
 
     /**
+     * @ORM\Column(type="string", unique=true)
+     */
+    protected $uri_part;
+
+    /**
      * @ORM\Column(type="text")
      */
     protected $annotation;
@@ -34,19 +39,14 @@ abstract class Article
     protected $text;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $keywords;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $description;
-
-    /**
-     * @ORM\Column(type="string", unique=true)
-     */
-    protected $uri_part;
 
     /**
      * @ORM\Column(type="datetime")
@@ -58,6 +58,9 @@ abstract class Article
      */
     protected $updated;
 
+    /**
+     * Constructor.
+     */
     public function __construct()
     {
         $this->created = new \DateTime();
@@ -98,6 +101,7 @@ abstract class Article
     public function setDescription($description)
     {
         $this->description = $description;
+
         return $this;
     }
 
@@ -124,6 +128,7 @@ abstract class Article
     public function setKeywords($keywords)
     {
         $this->keywords = $keywords;
+
         return $this;
     }
 
@@ -142,6 +147,7 @@ abstract class Article
     public function setText($text)
     {
         $this->text = $text;
+
         return $this;
     }
 
@@ -160,6 +166,7 @@ abstract class Article
     public function setTitle($title)
     {
         $this->title = $title;
+
         return $this;
     }
 
@@ -186,6 +193,7 @@ abstract class Article
     public function setUriPart($uri_part)
     {
         $this->uri_part = $uri_part;
+
         return $this;
     }
 
