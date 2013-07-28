@@ -12,10 +12,10 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="SmartCore\Bundle\BlogBundle\Repository\ArticleRepository")
  * @ORM\Table(name="blog_articles",
  *      indexes={
- *          @ORM\Index(name="created", columns={"created"})
+ *          @ORM\Index(name="created_at", columns={"created_at"})
  *      }
  * )
  */

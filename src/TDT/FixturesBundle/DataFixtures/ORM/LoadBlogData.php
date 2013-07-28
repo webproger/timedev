@@ -36,6 +36,8 @@ class LoadBlogData extends ContainerAware implements FixtureInterface, OrderedFi
         ;
         $manager->persist($article);
 
+        sleep(1);
+
         $article = new Article();
         $article->setTitle('Вторая статья')
             ->setSlug('second')
@@ -45,6 +47,8 @@ class LoadBlogData extends ContainerAware implements FixtureInterface, OrderedFi
             ->addTag($tag3)
         ;
         $manager->persist($article);
+
+        sleep(1);
 
         $article = new Article();
         $article->setTitle('Третья статья')

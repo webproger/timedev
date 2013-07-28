@@ -9,7 +9,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * @UniqueEntity(fields={"uri_part"}, message="Категория с таким сегментом URI уже существует.")
  */
-abstract class Category
+abstract class Category implements CategoryInterface
 {
     /**
      * @ORM\Id
@@ -27,7 +27,7 @@ abstract class Category
     protected $parent;
 
     /**
-     * @ORM\Column(type="string", unique=true)
+     * @ORM\Column(type="string", length=32, unique=true)
      */
     protected $slug;
 
@@ -44,15 +44,15 @@ abstract class Category
     /**
      * @ORM\Column(type="datetime")
      */
-    protected $created;
+    protected $created_at;
 
     /**
      * Constructor.
      */
     public function __construct()
     {
-        $this->articles = new ArrayCollection();
-        $this->created  = new \DateTime();
+        $this->articles   = new ArrayCollection();
+        $this->created_at = new \DateTime();
     }
 
     /**
@@ -60,15 +60,15 @@ abstract class Category
      */
     public function __toString()
     {
-        return $this->getName();
+        return $this->getTitle();
     }
 
     /**
      * @return \Datetime
      */
-    public function getCreated()
+    public function getCreatedAt()
     {
-        return $this->created;
+        return $this->created_at;
     }
 
     /**
@@ -107,10 +107,10 @@ abstract class Category
     }
 
     /**
-     * @param Category $parent
+     * @param CategoryInterface $parent
      * @return $this
      */
-    public function setParent(Category $parent)
+    public function setParent(CategoryInterface $parent)
     {
         $this->parent = $parent;
 

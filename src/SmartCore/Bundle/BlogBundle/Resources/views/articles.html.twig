@@ -4,7 +4,14 @@
 
     <h1>Блог</h1>
 
-    @todo тут будет блог.
+    {#@todo тут будет блог.#}
     {#{{ articles|ld }}#}
+
+    {% for article in articles %}
+        <h2><a href="{{ path('smart_blog_article', {'slug': article.slug}) }}">{{ article.title }}</a></h2>
+        <i class="icon-calendar"></i> {{ article.createdAt | date('l, F j, Y') }}
+        <p>{{ article.annotation }}</p>
+        <hr/>
+    {% endfor %}
 
 {% endblock smart_blog_content %}

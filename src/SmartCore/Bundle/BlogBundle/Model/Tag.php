@@ -15,7 +15,7 @@ abstract class Tag
     protected $id;
 
     /**
-     * @ORM\Column(type="string", unique=true)
+     * @ORM\Column(type="string", length=32, unique=true)
      */
     protected $slug;
 
@@ -27,7 +27,7 @@ abstract class Tag
     /**
      * @ORM\Column(type="datetime")
      */
-    protected $created;
+    protected $created_at;
 
     /**
      * @ORM\ManyToMany(targetEntity="Article", mappedBy="tags")
@@ -48,10 +48,10 @@ abstract class Tag
             $title = $slug;
         }
 
-        $this->slug     = strtolower($slug);
-        $this->title    = $title;
-        $this->articles = new ArrayCollection();
-        $this->created  = new \DateTime();
+        $this->articles   = new ArrayCollection();
+        $this->created_at = new \DateTime();
+        $this->slug       = strtolower($slug);
+        $this->title      = $title;
     }
 
     /**
@@ -81,9 +81,9 @@ abstract class Tag
     /**
      * @return \Datetime
      */
-    public function getCreated()
+    public function getCreatedAt()
     {
-        return $this->created;
+        return $this->created_at;
     }
 
     /**

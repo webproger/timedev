@@ -21,6 +21,11 @@ abstract class Article
     protected $id;
 
     /**
+     * @ORM\Column(type="boolean")
+     */
+    protected $enabled;
+
+    /**
      * @ORM\Column(type="string")
      * @Assert\NotBlank()
      */
@@ -56,21 +61,22 @@ abstract class Article
     /**
      * @ORM\Column(type="datetime")
      */
-    protected $created;
+    protected $created_at;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      * @Gedmo\Timestampable(on="update")
      */
-    protected $updated;
+    protected $updated_at;
 
     /**
      * Constructor.
      */
     public function __construct()
     {
-        $this->created = new \DateTime();
-        $this->tags = new ArrayCollection();
+        $this->created_at = new \DateTime();
+        $this->enabled    = true;
+        $this->tags       = new ArrayCollection();
     }
 
     /**
@@ -79,6 +85,14 @@ abstract class Article
     public function __toString()
     {
         return $this->getTitle();
+    }
+
+    /**
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 
     /**
@@ -103,9 +117,9 @@ abstract class Article
     /**
      * @return \Datetime
      */
-    public function getCreated()
+    public function getCreatedAt()
     {
-        return $this->created;
+        return $this->created_at;
     }
 
     /**
@@ -128,14 +142,6 @@ abstract class Article
     }
 
     /**
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
      * @param string $keywords
      * @return $this
      */
@@ -152,6 +158,25 @@ abstract class Article
     public function getKeywords()
     {
         return $this->keywords;
+    }
+
+    /**
+     * @param mixed $enabled
+     * @return $this
+     */
+    public function setEnabled($enabled)
+    {
+        $this->enabled = $enabled;
+
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getEnabled()
+    {
+        return $this->enabled;
     }
 
     /**
@@ -195,9 +220,9 @@ abstract class Article
     /**
      * @return \DateTime|null
      */
-    public function getUpdated()
+    public function getUpdatedAt()
     {
-        return $this->updated;
+        return $this->updated_at;
     }
 
     /**

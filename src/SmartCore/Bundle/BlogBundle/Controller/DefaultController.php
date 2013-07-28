@@ -8,10 +8,10 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-        //$blog = $this->get('smart_blog');
+        $blog = $this->get('smart_blog');
 
-        $articles = [];
-        //$articles = $blog->getArticlesByCategory(null, null, 10);
+//        $articles = [];
+        $articles = $blog->getLastArticles();
 
         return $this->render('SmartBlogBundle::articles.html.twig', [
             'articles' => $articles

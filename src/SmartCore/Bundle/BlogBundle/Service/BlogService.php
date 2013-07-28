@@ -3,9 +3,9 @@
 namespace SmartCore\Bundle\BlogBundle\Service;
 
 use Doctrine\ORM\EntityManager;
-use SmartCore\Bundle\BlogBundle\Entity\Article;
-use SmartCore\Bundle\BlogBundle\Entity\Category;
-use SmartCore\Bundle\BlogBundle\Entity\Tag;
+use SmartCore\Bundle\BlogBundle\Model\Article;
+use SmartCore\Bundle\BlogBundle\Model\CategoryInterface;
+use SmartCore\Bundle\BlogBundle\Model\Tag;
 
 class BlogService
 {
@@ -15,9 +15,14 @@ class BlogService
     protected $em;
 
     /**
-     * @var \Doctrine\ORM\EntityRepository
+     * @var \SmartCore\Bundle\BlogBundle\Repository\ArticleRepository
      */
     protected $articlesRepo;
+
+    /**
+     * @var integer
+     */
+    protected $articlesPerPage;
 
     /**
      * @param EntityManager $em
@@ -25,16 +30,18 @@ class BlogService
     public function __construct(EntityManager $em)
     {
         $this->em = $em;
-        $this->articlesRepo = $em->getRepository('SmartBlogBundle:Article');
+        $this->articlesRepo = $em->getRepository('TDTBlogBundle:Article'); // @todo конфиг репы как у FOSUB
+
+        $this->articlesPerPage = 10; // @todo сделать кол-во статей на страницу через конфиг.
     }
 
     /**
-     * @param Category $category
+     * @param CategoryInterface $category
      * @param null $offset
      * @param null $limit
      * @return Article[]|null
      */
-    public function getArticlesByCategory(Category $category = null, $offset = null, $limit  = null)
+    public function getArticlesByCategory(CategoryInterface $category = null, $offset = null, $limit  = null)
     {
 
     }
@@ -68,5 +75,18 @@ class BlogService
     public function getArticle($id)
     {
 
+    }
+
+    /**
+     * @param null $count
+     * @return Article[]|null
+     */
+    public function getLastArticles($count = null)
+    {
+        if (!$count) {
+            $count = $this->articlesPerPage;
+        }
+
+        return $this->articlesRepo->getLastArticles($count);
     }
 }
