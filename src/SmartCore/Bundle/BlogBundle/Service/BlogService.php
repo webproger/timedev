@@ -71,6 +71,15 @@ class BlogService
     }
 
     /**
+     * @param CategoryInterface $category
+     * @return \Doctrine\ORM\Query
+     */
+    public function getFindByCategoryQuery(CategoryInterface $category = null)
+    {
+        return $this->articlesRepo->getFindByCategoryQuery($category);
+    }
+
+    /**
      * @param TagInterface $tag
      * @param null $limit
      * @param null $offset

@@ -49,16 +49,28 @@ class ArticleRepository extends EntityRepository
      */
     public function findByCategory(CategoryInterface $category = null, $limit  = null, $offset = null)
     {
-        $query = $this->_em->createQuery("
+        $query = $this->getFindByCategoryQuery($category);
+        $query
+            ->setFirstResult($offset)
+            ->setMaxResults($limit);
+
+        return $query->getResult();
+    }
+
+    /**
+     * @param CategoryInterface $category
+     * @return \Doctrine\ORM\Query
+     *
+     * @todo $category
+     */
+    public function getFindByCategoryQuery(CategoryInterface $category = null)
+    {
+        return $this->_em->createQuery("
             SELECT a
             FROM {$this->_entityName} AS a
             WHERE a.enabled = true
             ORDER BY a.created_at, a.id DESC
-        ")->setFirstResult($offset)
-        ->setMaxResults($limit)
-        ;
-
-        return $query->getResult();
+        ");
     }
     
     /**

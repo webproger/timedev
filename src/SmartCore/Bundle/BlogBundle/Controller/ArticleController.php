@@ -30,38 +30,17 @@ class ArticleController extends Controller
 
         $blog = $this->get('smart_blog');
 
-        $offset = ($num > 0)
-            ? $blog->getArticlesPerPage() * ($num - 1)
-            : 0;
-
         $articlesPerPage = $blog->getArticlesPerPage();
-        $articlesCount   = $blog->getArticlesCountByCategory();
+        $offset          = ($num > 0) ? $articlesPerPage * ($num - 1) : 0;
         $articles        = $blog->getArticlesByCategory(null, $articlesPerPage, $offset);
-
-        /*
-        $pages_count     = ceil($articlesCount / $articlesPerPage);
-
-        if ($num > $pages_count) {
-            return $this->redirect($this->generateUrl('smart_blog_page_index'));
-        }
-
-        return $this->render('SmartBlogBundle::articles.html.twig', [
-            'articles'              => $articles,
-            'pager'                 => [
-                'items_per_page' => $articlesPerPage,
-                'items_count'    => $articlesCount,
-                'pages_count'    => $pages_count,
-                'current_page'   => $num,
-            ],
-        ]);
-        */
+        $articlesCount   = $blog->getArticlesCountByCategory();
 
         $pagerfanta = new Pagerfanta(new FixedAdapter($articlesCount, []));
         $pagerfanta->setMaxPerPage($articlesPerPage);
 
         try {
             $pagerfanta->setCurrentPage($num);
-        } catch(NotValidCurrentPageException $e) {
+        } catch (NotValidCurrentPageException $e) {
             return $this->redirect($this->generateUrl('smart_blog_index'));
         }
 
