@@ -19,6 +19,13 @@
         <hr/>
     {% endfor %}
 
+    {{ pagerfanta(pagerfanta, 'default_twitter_bootstrap', {
+        'css_container_class': 'pagination pagination-centered',
+        'prev_message': '&larr; Назад',
+        'next_message': 'Вперёд &rarr;',
+    }) }}
+
+    {#
     <div class="pagination pagination-centered">
         <ul>
             {% if 1 < pager.current_page %}
@@ -42,5 +49,6 @@
             {% endif %}
         </ul>
     </div>
+    #}
 
 {% endblock smart_blog_content %}

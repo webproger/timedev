@@ -2,7 +2,11 @@
 
 namespace SmartCore\Bundle\BlogBundle\Controller;
 
+use Pagerfanta\Adapter\FixedAdapter;
+use Pagerfanta\Exception\NotValidCurrentPageException;
+use Pagerfanta\Pagerfanta;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 class ArticleController extends Controller
 {
@@ -13,8 +17,17 @@ class ArticleController extends Controller
         ]);
     }
 
-    public function pageAction($num = 1)
+    /**
+     * @param Request $request
+     * @param int $num
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function pageAction(Request $request, $num = 1)
     {
+        if ($request->query->has('page')) {
+            $num = $request->query->get('page');
+        }
+
         $blog = $this->get('smart_blog');
 
         $offset = ($num > 0)
@@ -25,6 +38,7 @@ class ArticleController extends Controller
         $articlesCount   = $blog->getArticlesCountByCategory();
         $articles        = $blog->getArticlesByCategory(null, $articlesPerPage, $offset);
 
+        /*
         $pages_count     = ceil($articlesCount / $articlesPerPage);
 
         if ($num > $pages_count) {
@@ -39,6 +53,21 @@ class ArticleController extends Controller
                 'pages_count'    => $pages_count,
                 'current_page'   => $num,
             ],
+        ]);
+        */
+
+        $pagerfanta = new Pagerfanta(new FixedAdapter($articlesCount, []));
+        $pagerfanta->setMaxPerPage($articlesPerPage);
+
+        try {
+            $pagerfanta->setCurrentPage($num);
+        } catch(NotValidCurrentPageException $e) {
+            return $this->redirect($this->generateUrl('smart_blog_index'));
+        }
+
+        return $this->render('SmartBlogBundle::articles.html.twig', [
+            'articles'   => $articles,
+            'pagerfanta' => $pagerfanta,
         ]);
     }
 }

@@ -97,3 +97,14 @@ services:
     twig_extension.intl:
         class: Twig_Extensions_Extension_Intl
         tags: [{ name: 'twig.extension' }]
+    pagerfanta.view.default_twitter_bootstrap:
+        class: Pagerfanta\View\TwitterBootstrapView
+        public: false
+        tags: [{ name: pagerfanta.view, alias: default_twitter_bootstrap }]
+#    pagerfanta.view.twitter_bootstrap:
+#        class: Pagerfanta\View\OptionableView
+#        arguments:
+#            - @pagerfanta.view.default_twitter_bootstrap
+#            - { proximity: 2, previous_message: 'Назад', next_message: Siguiente }
+#        public: false
+#        tags: [{ name: pagerfanta.view, alias: twitter_bootstrap }]
