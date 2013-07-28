@@ -11,7 +11,7 @@ class ArticleRepository extends EntityRepository
 {
     /**
      * @param integer $limit
-     * @return \SmartCore\Bundle\BlogBundle\Model\Article[]|null // @todo ArticleInterface
+     * @return ArticleInterface[]|null
      */
     public function findLast($limit = null)
     {
@@ -29,16 +29,7 @@ class ArticleRepository extends EntityRepository
      */
     public function findByTag(TagInterface $tag)
     {
-        $query = $this->_em->createQuery("
-            SELECT a
-            FROM {$this->_entityName} AS a
-            JOIN a.tags AS t
-            WHERE t = :tag
-            AND a.enabled = true
-            ORDER BY a.created_at, a.id DESC
-        ")->setParameter('tag', $tag);
-
-        return $query->getResult();
+        return $this->getFindByTagQuery($tag)->getResult();
     }
 
     /**
@@ -62,6 +53,7 @@ class ArticleRepository extends EntityRepository
      * @return \Doctrine\ORM\Query
      *
      * @todo $category
+     * @todo enabled
      */
     public function getFindByCategoryQuery(CategoryInterface $category = null)
     {
@@ -72,7 +64,25 @@ class ArticleRepository extends EntityRepository
             ORDER BY a.created_at, a.id DESC
         ");
     }
-    
+
+    /**
+     * @param TagInterface $tag
+     * @return \Doctrine\ORM\Query
+     *
+     * @todo enabled
+     */
+    public function getFindByTagQuery(TagInterface $tag)
+    {
+        return $this->_em->createQuery("
+            SELECT a
+            FROM {$this->_entityName} AS a
+            JOIN a.tags AS t
+            WHERE t = :tag
+            AND a.enabled = true
+            ORDER BY a.created_at, a.id DESC
+        ")->setParameter('tag', $tag);
+    }
+
     /**
      * @param CategoryInterface $category
      * @return integer

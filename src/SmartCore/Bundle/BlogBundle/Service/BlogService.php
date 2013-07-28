@@ -39,7 +39,7 @@ class BlogService
         $this->articlesRepo = $em->getRepository('TDTBlogBundle:Article'); // @todo конфиг репы как у FOSUB
         $this->tagsRepo = $em->getRepository('TDTBlogBundle:Tag'); // @todo конфиг репы как у FOSUB
 
-        $this->articlesPerPage = 3; // @todo сделать кол-во статей на страницу через конфиг.
+        $this->articlesPerPage = 2; // @todo сделать кол-во статей на страницу через конфиг.
     }
 
     /**
@@ -77,6 +77,15 @@ class BlogService
     public function getFindByCategoryQuery(CategoryInterface $category = null)
     {
         return $this->articlesRepo->getFindByCategoryQuery($category);
+    }
+
+    /**
+     * @param TagInterface $tag
+     * @return \Doctrine\ORM\Query
+     */
+    public function getFindByTagQuery(TagInterface $tag)
+    {
+        return $this->articlesRepo->getFindByTagQuery($tag);
     }
 
     /**
