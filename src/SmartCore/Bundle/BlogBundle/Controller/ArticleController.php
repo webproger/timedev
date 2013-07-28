@@ -8,13 +8,24 @@ class ArticleController extends Controller
 {
     public function indexAction()
     {
-        //$blog = $this->get('smart_blog');
+        $blog = $this->get('smart_blog');
 
-        $articles = [];
-        //$articles = $blog->getArticlesByCategory(null, null, 10);
+        $articles = $blog->getLastArticles();
 
         return $this->render('SmartBlogBundle::articles.html.twig', [
-            'articles' => $articles
+            'articles' => $articles,
+            'count'    => $blog->getArticlesCountByCategory(),
+        ]);
+    }
+
+    public function showAction($slug)
+    {
+        $blog = $this->get('smart_blog');
+
+        $article = $blog->getArticleBySlug($slug);
+
+        return $this->render('SmartBlogBundle::article.html.twig', [
+            'article' => $article
         ]);
     }
 }

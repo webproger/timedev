@@ -161,7 +161,7 @@ abstract class Article
     }
 
     /**
-     * @param mixed $enabled
+     * @param boolean $enabled
      * @return $this
      */
     public function setEnabled($enabled)
@@ -226,7 +226,7 @@ abstract class Article
     }
 
     /**
-     * @param mixed $slug
+     * @param string $slug
      * @return $this
      */
     public function setSlug($slug)
@@ -237,7 +237,7 @@ abstract class Article
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getSlug()
     {

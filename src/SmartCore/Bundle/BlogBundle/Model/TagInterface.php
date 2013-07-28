@@ -2,23 +2,12 @@
 
 namespace SmartCore\Bundle\BlogBundle\Model;
 
-interface CategoryInterface
+interface TagInterface
 {
     /**
      * @return integer
      */
     public function getId();
-
-    /**
-     * @param CategoryInterface $parent
-     * @return $this
-     */
-    public function setParent(CategoryInterface $parent);
-
-    /**
-     * @return CategoryInterface
-     */
-    public function getParent();
 
     /**
      * @return mixed

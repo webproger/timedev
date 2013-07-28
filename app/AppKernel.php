@@ -28,6 +28,7 @@ class AppKernel extends Kernel
             new Ornicar\GravatarBundle\OrnicarGravatarBundle(),
             new Avalanche\Bundle\ImagineBundle\AvalancheImagineBundle(),
             new Vich\UploaderBundle\VichUploaderBundle(),
+            new Sonata\IntlBundle\SonataIntlBundle(),
             new SmartCore\Bundle\HtmlBundle\HtmlBundle(),
             new SmartCore\Bundle\BlogBundle\SmartBlogBundle(),
             new TDT\SiteBundle\TDTSiteBundle(),

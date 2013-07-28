@@ -5,7 +5,7 @@ namespace SmartCore\Bundle\BlogBundle\Model;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
-abstract class Tag
+abstract class Tag implements TagInterface
 {
     /**
      * @ORM\Id

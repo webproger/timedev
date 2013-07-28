@@ -1,0 +1,9 @@
+{% extends 'SmartBlogBundle::articles.html.twig' %}
+
+{% block smart_blog_content %}
+    <h1>Статьи по тэгу: {{ tag }}</h1>
+    <p>Всего: {{ count }}</p>
+
+    {{ parent() }}
+
+{% endblock smart_blog_content %}

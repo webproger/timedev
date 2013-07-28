@@ -2,16 +2,35 @@
 
 {% block smart_blog_content %}
 
-    <h1>Блог</h1>
-
-    {#@todo тут будет блог.#}
-    {#{{ articles|ld }}#}
-
     {% for article in articles %}
         <h2><a href="{{ path('smart_blog_article', {'slug': article.slug}) }}">{{ article.title }}</a></h2>
-        <i class="icon-calendar"></i> {{ article.createdAt | date('l, F j, Y') }}
+
+        <p>
+            <i class="icon-calendar"></i> {{ article.createdAt | localizeddate('full') }}
+            , написал <i class="icon-user"></i> <a href="#">{{ article.author }}</a>
+        </p>
+
         <p>{{ article.annotation }}</p>
+
+        {% for tag in article.tags %}
+            <a href="{{ path('smart_blog_tag', {'slug': tag.slug}) }}"><span class="label label-info">{{ tag }}</span></a>
+        {% endfor %}
+
         <hr/>
     {% endfor %}
+
+    <b>@todo постраничность</b>, Всего записей: <b>{{ count }} </b>
+    <div class="pagination __pagination-centered">
+        <ul>
+            <li><a href="#">Назад</a></li>
+            <li class="active">
+                <a href="#">1</a>
+            </li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">Вперёд</a></li>
+        </ul>
+    </div>
 
 {% endblock smart_blog_content %}

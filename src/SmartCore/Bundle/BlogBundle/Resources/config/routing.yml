@@ -1,22 +1,26 @@
 smart_blog_index:
     path: /
-    defaults: { _controller: SmartBlogBundle:Default:index }
+    defaults: { _controller: SmartBlogBundle:Article:index }
 
 smart_blog_article:
-    path: /{slug}/
-    defaults: { _controller: SmartBlogBundle:Default:index }
+    path: /{slug}.html
+    defaults: { _controller: SmartBlogBundle:Article:show }
 
 smart_blog_category:
     path: /category/{slug}/
     defaults: { _controller: SmartBlogBundle:Default:index }
 
 #smart_blog_category_page:
-#    path: /category/{slug}/page{page_num}/
+#    path: /category/{slug}/page/{page_num}/
 #    defaults: { _controller: SmartBlogBundle:Default:index }
+
+smart_blog_tag_index:
+    path: /tag/
+    defaults: { _controller: SmartBlogBundle:Tag:index }
 
 smart_blog_tag:
     path: /tag/{slug}/
-    defaults: { _controller: SmartBlogBundle:Default:index }
+    defaults: { _controller: SmartBlogBundle:Tag:showArticles }
 
 smart_blog_archive_yearly:
     path: /archive/{year}/

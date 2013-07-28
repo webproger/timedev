@@ -20,7 +20,9 @@ trait TagTrait
      */
     public function addTag(Tag $tag)
     {
-        $this->tags[] = $tag;
+        if (!$this->tags->contains($tag)) {
+            $this->tags->add($tag);
+        }
 
         return $this;
     }
@@ -31,7 +33,9 @@ trait TagTrait
      */
     public function removeTag(Tag $tag)
     {
-        $this->tags->removeElement($tag);
+        if ($this->tags->contains($tag)) {
+            $this->tags->removeElement($tag);
+        }
 
         return $this;
     }

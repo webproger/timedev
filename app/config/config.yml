@@ -88,3 +88,8 @@ vich_uploader:
         blog_image:
             uri_prefix: /images/blog
             upload_destination: %kernel.root_dir%/../web/images/blog
+
+services:
+    twig_extension.intl:
+        class: Twig_Extensions_Extension_Intl
+        tags: [{ name: 'twig.extension' }]
