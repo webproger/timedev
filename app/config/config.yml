@@ -81,3 +81,10 @@ fos_user:
     user_class: TDT\UserBundle\Entity\User
     group:
         group_class: TDT\UserBundle\Entity\Group
+
+vich_uploader:
+    db_driver: orm
+    mappings:
+        blog_image:
+            uri_prefix: /images/blog
+            upload_destination: %kernel.root_dir%/../web/images/blog

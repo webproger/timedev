@@ -17,7 +17,7 @@ abstract class Tag
     /**
      * @ORM\Column(type="string", unique=true)
      */
-    protected $name;
+    protected $slug;
 
     /**
      * @ORM\Column(type="string", unique=true)
@@ -39,19 +39,19 @@ abstract class Tag
     /**
      * Constructor.
      *
-     * @param string $name
+     * @param string $slug
      * @param string $title
      */
-    public function __construct($name, $title = null)
+    public function __construct($slug, $title = null)
     {
         if (!$title) {
-            $title = $name;
+            $title = $slug;
         }
 
-        $this->name = strtolower($name);
-        $this->title = $title;
+        $this->slug     = strtolower($slug);
+        $this->title    = $title;
         $this->articles = new ArrayCollection();
-        $this->created = new \DateTime();
+        $this->created  = new \DateTime();
     }
 
     /**
@@ -59,7 +59,7 @@ abstract class Tag
      */
     public function __toString()
     {
-        return $this->getName();
+        return $this->getTitle();
     }
 
     /**
@@ -87,21 +87,22 @@ abstract class Tag
     }
 
     /**
-     * @param string $name
+     * @param mixed $slug
      * @return $this
      */
-    public function setName($name)
+    public function setSlug($slug)
     {
-        $this->name = $name;
+        $this->slug = $slug;
+
         return $this;
     }
 
     /**
-     * @return string
+     * @return mixed
      */
-    public function getName()
+    public function getSlug()
     {
-        return $this->name;
+        return $this->slug;
     }
 
     /**

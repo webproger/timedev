@@ -7,6 +7,9 @@ use SmartCore\Bundle\BlogBundle\Model\Article as SmartArticle;
 use SmartCore\Bundle\BlogBundle\Model\CategoryTrait;
 use SmartCore\Bundle\BlogBundle\Model\TagTrait;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity
@@ -26,6 +29,22 @@ class Article extends SmartArticle
      * @ORM\JoinColumn(name="author_id")
      */
     protected $author;
+
+    /**
+     * @Assert\File(
+     *     maxSize="1M",
+     *     mimeTypes={"image/png", "image/jpeg", "image/pjpeg"}
+     * )
+     * @Vich\UploadableField(mapping="blog_image", fileNameProperty="image_name")
+     *
+     * @var File $image
+     */
+    protected $image;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $image_name;
 
     /**
      * @param UserInterface $author

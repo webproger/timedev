@@ -5,6 +5,8 @@ namespace SmartCore\Bundle\BlogBundle\Model;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @UniqueEntity(fields={"uri_part"}, message="Статья с таким сегментом URI уже существует.")
@@ -20,13 +22,15 @@ abstract class Article
 
     /**
      * @ORM\Column(type="string")
+     * @Assert\NotBlank()
      */
     protected $title;
 
     /**
-     * @ORM\Column(type="string", unique=true)
+     * @ORM\Column(type="string", length=128, unique=true)
+     * @Assert\NotBlank()
      */
-    protected $uri_part;
+    protected $slug;
 
     /**
      * @ORM\Column(type="text")
@@ -35,6 +39,7 @@ abstract class Article
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank()
      */
     protected $text;
 
@@ -55,6 +60,7 @@ abstract class Article
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Gedmo\Timestampable(on="update")
      */
     protected $updated;
 
@@ -64,8 +70,15 @@ abstract class Article
     public function __construct()
     {
         $this->created = new \DateTime();
-        $this->updated = null;
         $this->tags = new ArrayCollection();
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getTitle();
     }
 
     /**
@@ -75,6 +88,7 @@ abstract class Article
     public function setAnnotation($annotation)
     {
         $this->annotation = $annotation;
+
         return $this;
     }
 
@@ -187,21 +201,21 @@ abstract class Article
     }
 
     /**
-     * @param string $uri_part
+     * @param mixed $slug
      * @return $this
      */
-    public function setUriPart($uri_part)
+    public function setSlug($slug)
     {
-        $this->uri_part = $uri_part;
+        $this->slug = $slug;
 
         return $this;
     }
 
     /**
-     * @return string
+     * @return mixed
      */
-    public function getUriPart()
+    public function getSlug()
     {
-        return $this->uri_part;
+        return $this->slug;
     }
 }

@@ -25,6 +25,7 @@ trait CategoryTrait
     public function setCategory(Category $category)
     {
         $this->category = $category;
+
         return $this;
     }
 }

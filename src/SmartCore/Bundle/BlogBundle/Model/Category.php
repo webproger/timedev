@@ -20,7 +20,7 @@ abstract class Category
 
     /**
      * @ORM\OneToOne(targetEntity="Category")
-     * @ORM\JoinColumn(name="pid", referencedColumnName="id")
+     * @ORM\JoinColumn(name="pid")
      *
      * @var Category
      **/
@@ -29,7 +29,7 @@ abstract class Category
     /**
      * @ORM\Column(type="string", unique=true)
      */
-    protected $uri_part;
+    protected $slug;
 
     /**
      * @ORM\Column(type="string")
@@ -52,6 +52,7 @@ abstract class Category
     public function __construct()
     {
         $this->articles = new ArrayCollection();
+        $this->created  = new \DateTime();
     }
 
     /**
@@ -60,6 +61,14 @@ abstract class Category
     public function __toString()
     {
         return $this->getName();
+    }
+
+    /**
+     * @return \Datetime
+     */
+    public function getCreated()
+    {
+        return $this->created;
     }
 
     /**
@@ -136,30 +145,21 @@ abstract class Category
     }
 
     /**
-     * @param string $uri_part
+     * @param mixed $slug
      * @return $this
      */
-    public function setUriPart($uri_part)
+    public function setSlug($slug)
     {
-        $this->uri_part = $uri_part;
+        $this->slug = $slug;
 
         return $this;
     }
 
     /**
-     * @return string
+     * @return mixed
      */
-
-    public function getUriPart()
+    public function getSlug()
     {
-        return $this->uri_part;
-    }
-
-    /**
-     * @return \Datetime
-     */
-    public function getCreated()
-    {
-        return $this->created;
+        return $this->slug;
     }
 }
