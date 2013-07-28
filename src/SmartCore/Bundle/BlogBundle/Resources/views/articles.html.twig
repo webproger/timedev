@@ -2,7 +2,8 @@
 
 {% block smart_blog_content %}
 
-    {% for article in articles %}
+    {#{% for article in articles %}#}
+    {% for article in pagerfanta.currentPageResults %}
         <h2><a href="{{ path('smart_blog_article', {'slug': article.slug}) }}">{{ article.title }}</a></h2>
 
         <p>
@@ -19,10 +20,10 @@
         <hr/>
     {% endfor %}
 
-    {{ pagerfanta(pagerfanta, 'default_twitter_bootstrap', {
+    {# 'prev_message': '&larr; Назад', 'next_message': 'Вперёд &rarr;', #}
+    {{ pagerfanta(pagerfanta, 'twitter_bootstrap_translated', {
+        'routeName': 'smart_blog_page',
         'css_container_class': 'pagination pagination-centered',
-        'prev_message': '&larr; Назад',
-        'next_message': 'Вперёд &rarr;',
     }) }}
 
     {#
