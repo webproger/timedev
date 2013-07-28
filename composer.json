@@ -33,6 +33,7 @@
         "vich/uploader-bundle": "dev-master",
         "dropbox-php/dropbox-php": "dev-master",
         "sonata-project/intl-bundle": "dev-master",
+        "white-october/pagerfanta-bundle": "dev-master",
         "smart-core/html-bundle": "dev-master"
     },
     "scripts": {
