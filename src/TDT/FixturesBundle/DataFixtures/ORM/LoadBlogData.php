@@ -67,6 +67,17 @@ class LoadBlogData extends ContainerAware implements FixtureInterface, OrderedFi
         ;
         $manager->persist($article);
 
+        $article = new Article();
+        $article->setTitle('Пятая статья')
+            ->setSlug('fifth')
+            ->setAnnotation('Аннотация для пятой статьи.')
+            ->setText('Взаимодействие корпорации и клиента амбивалентно. Агентская комиссия специфицирует мониторинг активности, используя опыт предыдущих кампаний. Ассортиментная политика предприятия развивает стратегический маркетинг, используя опыт предыдущих кампаний. Более того, взаимодействие корпорации и клиента искажает бренд, расширяя долю рынка.')
+            ->setAuthor($user)
+            ->addTag($tag2)
+            ->addTag($tag4)
+        ;
+        $manager->persist($article);
+
         $manager->flush();
     }
 

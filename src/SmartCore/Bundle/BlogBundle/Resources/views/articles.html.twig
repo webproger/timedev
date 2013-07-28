@@ -19,17 +19,27 @@
         <hr/>
     {% endfor %}
 
-    <b>@todo постраничность</b>, Всего записей: <b>{{ count }} </b>
-    <div class="pagination __pagination-centered">
+    <div class="pagination pagination-centered">
         <ul>
-            <li><a href="#">Назад</a></li>
-            <li class="active">
-                <a href="#">1</a>
-            </li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">Вперёд</a></li>
+            {% if 1 < pager.current_page %}
+                <li><a href="{{ path('smart_blog_page', {'num': pager.current_page - 1}) }}">Назад</a></li>
+            {% endif %}
+
+            {% for i in 1..pager.pages_count %}
+                {% if i == pager.current_page %}
+                    <li class="active">
+                        <a>{{ i }}</a>
+                    </li>
+                {% else %}
+                    <li>
+                        <a href="{{ path('smart_blog_page', {'num': i}) }}">{{ i }}</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+
+            {% if pager.pages_count > pager.current_page %}
+                <li><a href="{{ path('smart_blog_page', {'num': pager.current_page + 1}) }}">Вперёд</a></li>
+            {% endif %}
         </ul>
     </div>
 

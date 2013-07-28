@@ -39,7 +39,7 @@ class BlogService
         $this->articlesRepo = $em->getRepository('TDTBlogBundle:Article'); // @todo конфиг репы как у FOSUB
         $this->tagsRepo = $em->getRepository('TDTBlogBundle:Tag'); // @todo конфиг репы как у FOSUB
 
-        $this->articlesPerPage = 10; // @todo сделать кол-во статей на страницу через конфиг.
+        $this->articlesPerPage = 3; // @todo сделать кол-во статей на страницу через конфиг.
     }
 
     /**
@@ -52,23 +52,31 @@ class BlogService
     }
 
     /**
+     * @return int
+     */
+    public function getArticlesPerPage()
+    {
+        return $this->articlesPerPage;
+    }
+
+    /**
      * @param CategoryInterface $category
-     * @param null $offset
-     * @param null $limit
+     * @param integer $limit
+     * @param integer $offset
      * @return Article[]|null
      */
-    public function getArticlesByCategory(CategoryInterface $category = null, $offset = null, $limit  = null)
+    public function getArticlesByCategory(CategoryInterface $category = null, $limit  = null, $offset = null)
     {
-        // @todo
+        return $this->articlesRepo->findByCategory($category, $limit, $offset);
     }
 
     /**
      * @param TagInterface $tag
-     * @param null $offset
      * @param null $limit
+     * @param null $offset
      * @return Article[]|null
      */
-    public function getArticlesByTag(TagInterface $tag, $offset = null, $limit  = null)
+    public function getArticlesByTag(TagInterface $tag, $limit  = null, $offset = null)
     {
         return $this->articlesRepo->findByTag($tag);
     }

@@ -1,10 +1,18 @@
 smart_blog_index:
     path: /
-    defaults: { _controller: SmartBlogBundle:Article:index }
+    defaults: { _controller: SmartBlogBundle:Article:page }
 
 smart_blog_article:
     path: /{slug}.html
     defaults: { _controller: SmartBlogBundle:Article:show }
+
+smart_blog_page_index:
+    path: /page/
+    defaults: { _controller: SmartBlogBundle:Article:page }
+
+smart_blog_page:
+    path: /page/{num}/
+    defaults: { _controller: SmartBlogBundle:Article:page }
 
 smart_blog_category:
     path: /category/{slug}/
