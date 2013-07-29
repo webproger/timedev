@@ -41,6 +41,17 @@ trait TagTrait
     }
 
     /**
+     * @param \Doctrine\Common\Collections\ArrayCollection $tags
+     * @return $this
+     */
+    public function setTags($tags)
+    {
+        $this->tags = $tags;
+
+        return $this;
+    }
+
+    /**
      * @return Tag[]
      */
     public function getTags()
