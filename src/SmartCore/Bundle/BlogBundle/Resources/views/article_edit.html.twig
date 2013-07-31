@@ -1,0 +1,33 @@
+{% extends 'SmartBlogBundle::layout.html.twig' %}
+
+{% block smart_blog_content %}
+
+    <h2><a href="{{ path('smart_blog_article', {'slug': article.slug}) }}">{{ article.title }}</a></h2>
+
+    <p>
+        <i class="icon-calendar"></i> {{ article.createdAt | localizeddate('full') }}
+        , написал <i class="icon-user"></i> <a href="#">{{ article.author }}</a>
+    </p>
+
+    <p>
+        <form action="{{ path('smart_blog_article'), {'slug': article.slug} }}" method="post" {{ form_enctype(form) }}>
+            {{ form_label(form.title, null, {'label': 'Заголовок', 'label_attr': {'class': 'text-info'}}) }}
+            {{ form_widget(form.title, {'attr': {'class': '.span8'}}) }}
+            {{ form_label(form.annotation, null, {'label': 'Аннонс', 'label_attr': {'class': 'text-info'}}) }}
+            {{ form_widget(form.annotation, {'attr': {'class': '.span8', rows: '4'}}) }}
+            {{ form_label(form.text, null, {'label': 'Текст', 'label_attr': {'class': 'text-info'}}) }}
+            {{ form_widget(form.text, {'attr': {'class': '.span8', rows: '8'}}) }}
+            {{ form_label(form.description, null, {'label': 'Мета тег Descriptions', 'label_attr': {'class': 'text-info'}}) }}
+            {{ form_widget(form.description, {'attr': {'class': '.span8'}}) }}
+            {{ form_label(form.keywords, null, {'label': 'Мета тег keywords', 'label_attr': {'class': 'text-info'}}) }}
+            {{ form_widget(form.keywords, {'attr': {'class': '.span8'}}) }}
+            {{ form_rest(form) }}
+            <p><input type="submit" class="btn btn-primary" /></p>
+        </form>
+    </p>
+
+    {% for tag in article.tags %}
+        <a href="{{ path('smart_blog_tag', {'slug': tag.slug}) }}"><span class="label label-info">{{ tag }}</span></a>
+    {% endfor %}
+
+{% endblock smart_blog_content %}
