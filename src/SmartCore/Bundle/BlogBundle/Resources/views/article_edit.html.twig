@@ -6,7 +6,6 @@
     <p>
     <form action="{{ path('smart_blog_article_edit', {'id': article.id}) }}" method="post" {{ form_enctype(form) }}>
         {{ form_widget(form) }}
-        {{ form_rest(form) }}
         <p><input type="submit" class="btn btn-primary" /></p>
     </form>
     </p>
