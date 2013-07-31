@@ -44,7 +44,7 @@ class ArticleController extends Controller
     public function editAction($id, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $article = $this->get('smart_blog')->getArticleBySlug($id);
+        $article = $this->get('smart_blog')->getArticle($id);
 
 
         $form = $this->createForm(new ArticleFormType(), $article);
