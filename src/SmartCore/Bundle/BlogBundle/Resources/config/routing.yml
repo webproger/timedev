@@ -6,6 +6,10 @@ smart_blog_article:
     path: /{slug}.html
     defaults: { _controller: SmartBlogBundle:Article:show }
 
+smart_blog_article_edit:
+    path: /article/{id}/edit/
+    defaults: { _controller: SmartBlogBundle:Article:edit }
+
 smart_blog_page_index:
     path: /page/
     defaults: { _controller: SmartBlogBundle:Article:page }

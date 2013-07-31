@@ -1,0 +1,14 @@
+{% extends 'SmartBlogBundle::layout.html.twig' %}
+
+{% block smart_blog_content %}
+
+
+    <p>
+    <form action="{{ path('smart_blog_article_edit', {'id': article.id}) }}" method="post" {{ form_enctype(form) }}>
+        {{ form_widget(form) }}
+        <p><input type="submit" class="btn btn-primary" /></p>
+    </form>
+    </p>
+
+
+{% endblock smart_blog_content %}
