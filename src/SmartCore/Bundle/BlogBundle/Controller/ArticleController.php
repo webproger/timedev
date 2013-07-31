@@ -55,7 +55,10 @@ class ArticleController extends Controller
                 $em->persist($form->getData());
                 $em->flush();
 
-                return $this->redirect($this->generateUrl('smart_blog_article'));
+                return $this->redirect($this->generateUrl(
+                    'smart_blog_article',
+                    ['slug' => $form->getData()->getSlug()]
+                ));
             }
         }
 

@@ -17,14 +17,14 @@ class ArticleFormType extends AbstractType
             ->add('text')
             ->add('description')
             ->add('keywords')
-            ->add('tags')
+            ->add('tags', null, ['expanded' => true])
         ;
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'SmartCore\Bundle\BlogBundle\Model\Article',
+            'data_class' => 'TDT\BlogBundle\Entity\Article',
         ));
     }
 

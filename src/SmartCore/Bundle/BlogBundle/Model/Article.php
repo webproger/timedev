@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * @UniqueEntity(fields={"uri_part"}, message="Статья с таким сегментом URI уже существует.")
+ * @UniqueEntity(fields={"slug"}, message="Статья с таким сегментом URI уже существует.")
  */
 abstract class Article
 {
