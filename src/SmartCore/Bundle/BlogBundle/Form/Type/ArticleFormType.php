@@ -3,16 +3,25 @@ namespace SmartCore\Bundle\BlogBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class ArticleFormType extends AbstractType
 {
+    protected $class;
+
+    /**
+     * @param string $class
+     */
+    public function __construct($class)
+    {
+        $this->class = $class;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('title')
+            ->add('slug')
             ->add('annotation')
             ->add('text')
             ->add('description')
@@ -24,12 +33,12 @@ class ArticleFormType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'TDT\BlogBundle\Entity\Article',
+            'data_class' => $this->class,
         ));
     }
 
     public function getName()
     {
-        return 'article';
+        return 'smart_article';
     }
 }

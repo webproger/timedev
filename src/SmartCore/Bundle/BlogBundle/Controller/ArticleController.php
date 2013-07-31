@@ -4,14 +4,18 @@ namespace SmartCore\Bundle\BlogBundle\Controller;
 
 use Pagerfanta\Exception\NotValidCurrentPageException;
 use Pagerfanta\Pagerfanta;
-use SmartCore\Bundle\BlogBundle\Pagerfanta\SimpleDoctrineORMAdapter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use SmartCore\Bundle\BlogBundle\Form\Type\ArticleFormType;
+use SmartCore\Bundle\BlogBundle\Pagerfanta\SimpleDoctrineORMAdapter;
 
 class ArticleController extends Controller
 {
+    /**
+     * @param string $slug
+     * @return Response
+     */
     public function showAction($slug)
     {
         return $this->render('SmartBlogBundle::article.html.twig', [
@@ -20,8 +24,8 @@ class ArticleController extends Controller
     }
 
     /**
-     * @param int $num
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @param int $page
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
     public function pageAction($page = 1)
     {
@@ -41,30 +45,31 @@ class ArticleController extends Controller
         ]);
     }
 
-    public function editAction($id, Request $request)
+    /**
+     * @param Request $request
+     * @param integer $id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     */
+    public function editAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
         $article = $this->get('smart_blog')->getArticle($id);
 
-
-        $form = $this->createForm(new ArticleFormType(), $article);
-        if ($request->getMethod() == 'POST') {
-            $form->bind($request);
+        $form = $this->createForm(new ArticleFormType(get_class($article)), $article);
+        if ($request->isMethod('POST')) {
+            $form->submit($request);
 
             if ($form->isValid()) {
-                $em->persist($form->getData());
+                $article = $form->getData();
+                $em->persist($article);
                 $em->flush();
 
-                return $this->redirect($this->generateUrl(
-                    'smart_blog_article',
-                    ['slug' => $form->getData()->getSlug()]
-                ));
+                return $this->redirect($this->generateUrl('smart_blog_article', ['slug' => $article->getSlug()] ));
             }
         }
 
         return $this->render('SmartBlogBundle::article_edit.html.twig', [
             'form' => $form->createView(),
-            'article' => $article,
         ]);
     }
 }

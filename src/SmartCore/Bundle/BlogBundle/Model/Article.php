@@ -76,7 +76,11 @@ abstract class Article
     {
         $this->created_at = new \DateTime();
         $this->enabled    = true;
-        $this->tags       = new ArrayCollection();
+
+        $traits = class_uses($this, false);
+        if (array_key_exists('SmartCore\Bundle\BlogBundle\Model\TagTrait', $traits)) {
+            $this->tags = new ArrayCollection();
+        }
     }
 
     /**

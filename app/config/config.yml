@@ -78,6 +78,7 @@ mopa_bootstrap:
     form:
         error_type: block # or inline which is default
         render_required_asterisk: true
+        render_optional_text: false
 
 fos_user:
     db_driver: orm
