@@ -5,8 +5,8 @@ namespace SmartCore\Bundle\MediaBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Table(name="media_files")
  * @ORM\Entity
+ * @ORM\Table(name="media_files")
  */
 class File
 {
@@ -17,44 +17,51 @@ class File
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
      * @ORM\Column(type="string", length=100)
      */
-    private $filename;
+    protected $filename;
 
     /**
      * @var string
      *
      * @ORM\Column(name="original_filename", type="string", length=255)
      */
-    private $originalFilename;
+    protected $originalFilename;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="created_at", type="datetime")
      */
-    private $createdAt;
+    protected $createdAt;
 
     /**
      * @var string
      *
      * @ORM\Column(name="mime_type", type="string", length=32)
      */
-    private $mimeType;
+    protected $mimeType;
 
     /**
      * @var integer
      *
      * @ORM\Column(type="bigint")
      */
-    private $size;
+    protected $size;
 
-
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime();
+    }
+    
     /**
      * @return integer
      */
@@ -99,17 +106,6 @@ class File
     public function getOriginalFilename()
     {
         return $this->originalFilename;
-    }
-
-    /**
-     * @param \DateTime $createdAt
-     * @return $this
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
-    
-        return $this;
     }
 
     /**
