@@ -37,6 +37,11 @@ abstract class Tag implements TagInterface
     protected $articles;
 
     /**
+     * @ORM\Column(type="integer")
+     */
+    protected $weight;
+
+    /**
      * Constructor.
      *
      * @param string $slug
@@ -84,6 +89,34 @@ abstract class Tag implements TagInterface
     public function getCreatedAt()
     {
         return $this->created_at;
+    }
+
+    /**
+     * @return $this
+     */
+    public function increment()
+    {
+        $this->weight += 1;
+
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function decrement()
+    {
+        $this->weight -= 1;
+
+        return $this;
+    }
+
+    /**
+     * @return integer
+     */
+    public function getWeight()
+    {
+        return $this->weight;
     }
 
     /**
