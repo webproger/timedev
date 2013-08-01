@@ -36,6 +36,7 @@ class AppKernel extends Kernel
             new TDT\UserBundle\TDTUserBundle(),
             new TDT\BlogBundle\TDTBlogBundle(),
             new TDT\FixturesBundle\TDTFixturesBundle(),
+            new SmartCore\Bundle\MediaBundle\SmartMediaBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

@@ -1,3 +1,7 @@
+smart_media:
+    resource: "@SmartMediaBundle/Resources/config/routing.yml"
+    prefix:   /
+
 tdt_site:
     resource: "@TDTSiteBundle/Resources/config/routing.yml"
     prefix:   /
