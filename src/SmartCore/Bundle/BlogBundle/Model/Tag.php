@@ -57,6 +57,7 @@ abstract class Tag implements TagInterface
         $this->created_at = new \DateTime();
         $this->slug       = strtolower($slug);
         $this->title      = $title;
+        $this->weight     = 0;
     }
 
     /**
