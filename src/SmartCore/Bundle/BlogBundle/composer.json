@@ -13,7 +13,8 @@
     ],
     "require": {
         "php": ">=5.4.1",
-        "stof/doctrine-extensions-bundle": "dev-master"
+        "stof/doctrine-extensions-bundle": "dev-master",
+        "white-october/pagerfanta-bundle": "dev-master"
     },
     "autoload": {
         "psr-0": { "SmartCore\\Bundle\\BlogBundle": "" }
