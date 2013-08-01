@@ -11,13 +11,29 @@ use Doctrine\ORM\Mapping as ORM;
 class File
 {
     /**
-     * @var integer
-     *
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Collection", inversedBy="files")
+     * @ORM\JoinColumn(name="collection_id")
+     */
+    protected $collection;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="category", inversedBy="files")
+     * @ORM\JoinColumn(name="category_id")
+     */
+    protected $category;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Storage", inversedBy="files")
+     * @ORM\JoinColumn(name="storage_id")
+     */
+    protected $storage;
 
     /**
      * @var string
@@ -39,6 +55,13 @@ class File
      * @ORM\Column(name="created_at", type="datetime")
      */
     protected $createdAt;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=16)
+     */
+    protected $type;
 
     /**
      * @var string
@@ -114,6 +137,25 @@ class File
     public function getCreatedAt()
     {
         return $this->createdAt;
+    }
+
+    /**
+     * @param string $type
+     * @return $this
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
     }
 
     /**
