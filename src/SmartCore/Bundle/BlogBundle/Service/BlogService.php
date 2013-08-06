@@ -52,7 +52,7 @@ class BlogService
     }
 
     /**
-     * @return int
+     * @return integer
      */
     public function getArticlesPerPage()
     {
@@ -61,17 +61,17 @@ class BlogService
 
     /**
      * @param CategoryInterface $category
-     * @param integer $limit
-     * @param integer $offset
+     * @param integer|null $limit
+     * @param integer|null $offset
      * @return Article[]|null
      */
-    public function getArticlesByCategory(CategoryInterface $category = null, $limit  = null, $offset = null)
+    public function getArticlesByCategory(CategoryInterface $category = null, $limit = null, $offset = null)
     {
         return $this->articlesRepo->findByCategory($category, $limit, $offset);
     }
 
     /**
-     * @param CategoryInterface $category
+     * @param CategoryInterface|null $category
      * @return \Doctrine\ORM\Query
      */
     public function getFindByCategoryQuery(CategoryInterface $category = null)
@@ -90,9 +90,11 @@ class BlogService
 
     /**
      * @param TagInterface $tag
-     * @param null $limit
-     * @param null $offset
+     * @param integer|null $limit
+     * @param integer|null $offset
      * @return Article[]|null
+     *
+     * @todo постраничность.
      */
     public function getArticlesByTag(TagInterface $tag, $limit  = null, $offset = null)
     {
@@ -100,9 +102,9 @@ class BlogService
     }
 
     /**
-     * @param integer $year
-     * @param integer $month
-     * @param integer $day
+     * @param integer|null $year
+     * @param integer|null $month
+     * @param integer|null $day
      * @return Article[]|null
      */
     public function getArticlesByDate($year = null, $month = null, $day = null)
@@ -129,10 +131,10 @@ class BlogService
     }
 
     /**
-     * @param integer $limit
+     * @param integer|null $limit
      * @return Article[]|null
      */
-    public function getLastArticles($limit = null)
+    public function getLastArticles($limit = 10)
     {
         if (!$limit) {
             $limit = $this->articlesPerPage;

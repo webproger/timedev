@@ -10,7 +10,7 @@ use SmartCore\Bundle\BlogBundle\Model\TagInterface;
 class ArticleRepository extends EntityRepository
 {
     /**
-     * @param integer $limit
+     * @param integer|null $limit
      * @return ArticleInterface[]|null
      */
     public function findLast($limit = null)
@@ -33,9 +33,9 @@ class ArticleRepository extends EntityRepository
     }
 
     /**
-     * @param CategoryInterface $category
-     * @param null $offset
-     * @param null $limit
+     * @param CategoryInterface|null $category
+     * @param integer|null $offset
+     * @param integer|null $limit
      * @return ArticleInterface[]|null
      */
     public function findByCategory(CategoryInterface $category = null, $limit  = null, $offset = null)
@@ -49,7 +49,7 @@ class ArticleRepository extends EntityRepository
     }
 
     /**
-     * @param CategoryInterface $category
+     * @param CategoryInterface|null $category
      * @return \Doctrine\ORM\Query
      *
      * @todo $category
@@ -84,7 +84,7 @@ class ArticleRepository extends EntityRepository
     }
 
     /**
-     * @param CategoryInterface $category
+     * @param CategoryInterface|null $category
      * @return integer
      *
      * @todo поддержку категорий.
