@@ -52,7 +52,6 @@ class ArticleController extends Controller
      */
     public function editAction(Request $request, $id)
     {
-        $em = $this->getDoctrine()->getManager();
         $article = $this->get('smart_blog')->getArticle($id);
 
         $form = $this->createForm(new ArticleFormType(get_class($article)), $article);
@@ -61,6 +60,9 @@ class ArticleController extends Controller
 
             if ($form->isValid()) {
                 $article = $form->getData();
+
+                /** @var \Doctrine\ORM\EntityManager $em */
+                $em = $this->getDoctrine()->getManager();
                 $em->persist($article);
                 $em->flush();
 
