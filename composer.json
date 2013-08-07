@@ -34,6 +34,7 @@
         "dropbox-php/dropbox-php": "dev-master",
         "sonata-project/intl-bundle": "dev-master",
         "white-october/pagerfanta-bundle": "dev-master",
+        "zendframework/zend-tag": "2.2.*",
         "smart-core/html-bundle": "dev-master"
     },
     "scripts": {
