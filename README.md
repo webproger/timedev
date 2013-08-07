@@ -23,6 +23,7 @@ $ php composer.phar install
 
 ``` bash
 $ app/console doctrine:database:create
+$ app/console doctrine:schema:create
 ```
 
 ### Шаг 4: Загрузка демо-данных:
