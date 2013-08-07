@@ -35,6 +35,8 @@
         "sonata-project/intl-bundle": "dev-master",
         "white-october/pagerfanta-bundle": "dev-master",
         "zendframework/zend-tag": "2.2.*",
+        "helios-ag/fm-elfinder-bundle": "dev-master",
+        "stfalcon/tinymce-bundle": "dev-master",
         "smart-core/html-bundle": "dev-master"
     },
     "scripts": {

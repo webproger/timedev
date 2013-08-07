@@ -30,6 +30,8 @@ class AppKernel extends Kernel
             new Vich\UploaderBundle\VichUploaderBundle(),
             new Sonata\IntlBundle\SonataIntlBundle(),
             new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
+            new FM\ElfinderBundle\FMElfinderBundle(),
+            new Stfalcon\Bundle\TinymceBundle\StfalconTinymceBundle(),
             new SmartCore\Bundle\HtmlBundle\HtmlBundle(),
             new SmartCore\Bundle\BlogBundle\SmartBlogBundle(),
             new TDT\SiteBundle\TDTSiteBundle(),
