@@ -23,6 +23,11 @@
 {% endblock html_head_styles %}
 #}
 
+{% block html_head_scripts %}{{ parent() }}
+    <script src="{{ asset('assets/jquery/1.10.2/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/bootstrap/2.3.2/js/bootstrap.min.js') }}"></script>
+{% endblock html_head_scripts %}
+
 {% block body %}
 
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -46,7 +51,7 @@
                             <li class="divider-vertical"></li>
                             <li class="dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-user icon-white"></i>
-                                    &nbsp;{{ app.user.username }}<b class="caret"></b></a>
+                                    &nbsp;{{ app.user.username }} <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="{{ path('fos_user_profile_show') }}"><i class="icon-cog"></i> Мой профиль</a></li>
                                     <li class="divider"></li>
@@ -77,13 +82,11 @@
 
     <div class="navbar navbar-fixed-bottom navbar">
         <div class="navbar-inner text-center">
-            <span class="navbar-text">TimeDev &copy; 2013</span>
+            <span class="navbar-text">TDT &copy; 2013</span>
         </div>
     </div>
 
 {% endblock body %}
 
 {% block body_js %}
-    <script src="{{ asset('assets/jquery/1.10.2/jquery.min.js') }}"></script>
-    <script src="{{ asset('assets/bootstrap/2.3.2/js/bootstrap.min.js') }}"></script>
 {% endblock body_js %}

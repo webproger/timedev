@@ -7,7 +7,7 @@ use SmartCore\Bundle\BlogBundle\Model\ArticleInterface;
 use SmartCore\Bundle\BlogBundle\Model\CategoryInterface;
 use SmartCore\Bundle\BlogBundle\Model\TagInterface;
 
-class ArticleRepository extends EntityRepository
+class ArticleRepository extends EntityRepository implements ArticleRepositoryInterface
 {
     /**
      * @param integer|null $limit
@@ -18,7 +18,6 @@ class ArticleRepository extends EntityRepository
         return $this->findBy([
             'enabled'    => true,
         ], [
-            'created_at' => 'DESC',
             'id'         => 'DESC',
         ], $limit);
     }
@@ -38,9 +37,43 @@ class ArticleRepository extends EntityRepository
      * @param integer|null $limit
      * @return ArticleInterface[]|null
      */
-    public function findByCategory(CategoryInterface $category = null, $limit  = null, $offset = null)
+    public function findByCategory(CategoryInterface $category = null, $limit = null, $offset = null)
     {
         $query = $this->getFindByCategoryQuery($category);
+        $query
+            ->setFirstResult($offset)
+            ->setMaxResults($limit);
+
+        return $query->getResult();
+    }
+
+    /**
+     * @param CategoryInterface[]|array $categories
+     * @param int|null $limit
+     * @param int|null $offset
+     * @return ArticleInterface[]|null
+     */
+    public function findByCategories(array $categories = [], $limit = null, $offset = null)
+    {
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('a')
+           ->from($this->_entityName, 'a')
+           ->orderBy('a.id', 'DESC');
+
+        foreach ($categories as $key => $category) {
+            $id = $category->getId();
+
+            if (0 == $key) {
+                $qb->where('a.category = :id' . $id);
+            } else {
+                $qb->orWhere('a.category = :id' . $id);
+            }
+
+            $qb->setParameter('id' . $id, $category);
+        }
+
+        $query = $qb->getQuery();
+
         $query
             ->setFirstResult($offset)
             ->setMaxResults($limit);
@@ -61,7 +94,7 @@ class ArticleRepository extends EntityRepository
             SELECT a
             FROM {$this->_entityName} AS a
             WHERE a.enabled = true
-            ORDER BY a.created_at, a.id DESC
+            ORDER BY a.id DESC
         ");
     }
 
@@ -79,7 +112,7 @@ class ArticleRepository extends EntityRepository
             JOIN a.tags AS t
             WHERE t = :tag
             AND a.enabled = true
-            ORDER BY a.created_at, a.id DESC
+            ORDER BY a.id DESC
         ")->setParameter('tag', $tag);
     }
 
@@ -96,25 +129,6 @@ class ArticleRepository extends EntityRepository
             FROM {$this->_entityName} a
             WHERE a.enabled = true
         ");
-
-        return $query->getSingleScalarResult();
-    }
-
-    /**
-     * @param TagInterface $tag
-     * @return integer
-     *
-     * @todo возможность выбора по нескольким тэгам.
-     */
-    public function getCountByTag(TagInterface $tag)
-    {
-        $query = $this->_em->createQuery("
-            SELECT COUNT(a.id)
-            FROM {$this->_entityName} AS a
-            JOIN a.tags AS t
-            WHERE t = :tag
-            AND a.enabled = true
-        ")->setParameter('tag', $tag);
 
         return $query->getSingleScalarResult();
     }

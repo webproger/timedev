@@ -1,0 +1,9 @@
+{% extends '@TDTNews/layout.html.twig' %}
+
+{% block html_head_title %} Написать новость: &raquo; {{ parent() }} {% endblock html_head_title %}
+
+{% block smart_blog_content %}
+
+    {% include '@TDTNews/Article/form_create.html.twig' %}
+
+{% endblock smart_blog_content %}

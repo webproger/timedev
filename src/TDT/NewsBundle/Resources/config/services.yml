@@ -1,0 +1,17 @@
+parameters:
+#    tdt_news.example.class: TDT\NewsBundle\Example
+
+services:
+    tdt_news.article:
+        class: SmartCore\Bundle\BlogBundle\Service\ArticleService
+        arguments:
+            - @doctrine.orm.default_entity_manager
+            - @tdt_news.article.repository
+            - @event_dispatcher
+            - %smart_blog.items_per_page%
+
+    tdt_news.article.repository:
+        class:           SmartCore\Bundle\BlogBundle\Repository\ArticleRepository
+        factory_service: doctrine
+        factory_method:  getRepository
+        arguments:       ['TDT\NewsBundle\Entity\Article']

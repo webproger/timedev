@@ -3,22 +3,34 @@
 namespace TDT\SiteBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
+use Symfony\Component\DependencyInjection\ContainerAware;
 
-class SiteMenu
+class SiteMenu extends ContainerAware
 {
+    /**
+     * @param FactoryInterface $factory
+     * @param array $options
+     * @return \Knp\Menu\ItemInterface
+     */
     public function main(FactoryInterface $factory, array $options)
     {
         $menu = $factory->createItem('site_main');
+        $menu->setChildrenAttribute('class', isset($options['class']) ? $options['class'] : 'nav');
+        $menu->addChild('Homepage', ['route' => 'tdt_site_index']);
+        $menu->addChild('Blog',     ['route' => 'smart_blog_index']);
+        $menu->addChild('News',     ['route' => 'tdt_news_index']);
 
-        if (isset($options['class'])) {
-            $menu->setChildrenAttribute('class', $options['class']);
-        } else {
-            $menu->setChildrenAttribute('class', 'nav');
+        if (true === $this->container->get('security.context')->isGranted('ROLE_BLOGGER')) {
+            $menu->addChild('Create Article', ['route' => 'smart_blog_article_create']);
         }
 
-        $menu->addChild('Homepage',     ['route' => 'tdt_site_index']);
-        $menu->addChild('Blog',         ['route' => 'smart_blog_index']);
-        $menu->addChild('Forum',        ['uri'   => 'http://forum.timedev.net/']);
+        if (true === $this->container->get('security.context')->isGranted('ROLE_NEWSMAKER')) {
+            $menu->addChild('Create News', ['route' => 'tdt_news_article_create']);
+        }
+
+        if (true === $this->container->get('security.context')->isGranted('ROLE_ADMIN')) {
+            $menu->addChild('Admin', ['route' => 'tdt_site_admin']);
+        }
 
         return $menu;
     }

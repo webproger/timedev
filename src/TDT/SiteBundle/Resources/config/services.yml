@@ -1,12 +1,7 @@
 parameters:
-#    tdt_site.example.class: TDT\SiteBundle\Example
 
 services:
-#    tdt_site.example:
-#        class: %tdt_site.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
-
-# Menu selected items
+    # Menu selected items
     tdt_site.menu.voter.request:
         class: TDT\SiteBundle\Menu\RequestVoter
         arguments:

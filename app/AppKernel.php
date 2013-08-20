@@ -30,8 +30,8 @@ class AppKernel extends Kernel
             new Vich\UploaderBundle\VichUploaderBundle(),
             new Sonata\IntlBundle\SonataIntlBundle(),
             new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
-            new FM\ElfinderBundle\FMElfinderBundle(),
             new Stfalcon\Bundle\TinymceBundle\StfalconTinymceBundle(),
+            new FM\ElfinderBundle\FMElfinderBundle(),
             new SmartCore\Bundle\HtmlBundle\HtmlBundle(),
             new SmartCore\Bundle\BlogBundle\SmartBlogBundle(),
             new TDT\SiteBundle\TDTSiteBundle(),
@@ -39,6 +39,7 @@ class AppKernel extends Kernel
             new TDT\BlogBundle\TDTBlogBundle(),
             new TDT\FixturesBundle\TDTFixturesBundle(),
             new SmartCore\Bundle\MediaBundle\SmartMediaBundle(),
+            new TDT\NewsBundle\TDTNewsBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
@@ -78,3 +79,4 @@ class AppKernel extends Kernel
         return $this->rootDir.'/../var/logs';
     }
 }
+

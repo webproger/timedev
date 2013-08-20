@@ -5,6 +5,7 @@ namespace TDT\BlogBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use SmartCore\Bundle\BlogBundle\Model\Article as SmartArticle;
 use SmartCore\Bundle\BlogBundle\Model\CategoryTrait;
+use SmartCore\Bundle\BlogBundle\Model\SignedArticleInterface;
 use SmartCore\Bundle\BlogBundle\Model\TagTrait;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\HttpFoundation\File\File;
@@ -19,7 +20,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  *      }
  * )
  */
-class Article extends SmartArticle
+class Article extends SmartArticle implements SignedArticleInterface
 {
     use CategoryTrait;
     use TagTrait;
@@ -47,6 +48,20 @@ class Article extends SmartArticle
     protected $image_name;
 
     /**
+     * @ORM\Column(type="boolean")
+     */
+    protected $is_commentable;
+
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        $this->is_commentable = true;
+    }
+
+    /**
      * @param UserInterface $author
      * @return $this
      */
@@ -63,5 +78,24 @@ class Article extends SmartArticle
     public function getAuthor()
     {
         return $this->author;
+    }
+
+    /**
+     * @param bool $is_commentable
+     * @return $this
+     */
+    public function setIsCommentable($is_commentable)
+    {
+        $this->is_commentable = $is_commentable;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getIsCommentable()
+    {
+        return $this->is_commentable;
     }
 }
