@@ -1,7 +1,9 @@
 parameters:
-#    tdt_blog.example.class: TDT\BlogBundle\Example
+    tdt_blog.listener.article_author.class: SmartCore\Bundle\BlogBundle\EventListener\ArticleAuthorListener
 
 services:
-#    tdt_blog.example:
-#        class: %tdt_blog.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+    tdt_blog.listener.article_author:
+        class: %tdt_blog.listener.article_author.class%
+        arguments: [@security.context, @logger]
+        tags:
+            - { name: kernel.event_subscriber }

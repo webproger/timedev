@@ -13,13 +13,60 @@ use SmartCore\Bundle\BlogBundle\Pagerfanta\SimpleDoctrineORMAdapter;
 class ArticleController extends Controller
 {
     /**
+     * Имя сервиса по работе со статьями.
+     *
+     * @var string
+     */
+    protected $articleServiceName;
+
+    /**
+     * Маршрут на список статей.
+     *
+     * @var string
+     */
+    protected $routeIndex;
+
+    /**
+     * Маршрут просмотра статьи.
+     *
+     * @var string
+     */
+    protected $routeArticle;
+
+    /**
+     * Имя бандла. Для перегрузки шаблонов.
+     *
+     * @var string
+     */
+    protected $bundleName;
+
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        $this->articleServiceName   = 'smart_blog.article';
+        $this->routeIndex           = 'smart_blog_index';
+        $this->routeArticle         = 'smart_blog_article';
+        $this->bundleName           = 'SmartBlogBundle';
+    }
+
+    /**
      * @param string $slug
      * @return Response
+     *
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
     public function showAction($slug)
     {
-        return $this->render('SmartBlogBundle::article.html.twig', [
-            'article' => $this->get('smart_blog')->getArticleBySlug($slug),
+        $article = $this->get($this->articleServiceName)->getBySlug($slug);
+
+        if (!$article) {
+            throw $this->createNotFoundException();
+        }
+
+        return $this->render($this->bundleName . ':Article:show.html.twig', [
+            'article' => $article,
         ]);
     }
 
@@ -29,30 +76,40 @@ class ArticleController extends Controller
      */
     public function pageAction($page = 1)
     {
-        $blog = $this->get('smart_blog');
+        /** @var \SmartCore\Bundle\BlogBundle\Service\ArticleService $articleService */
+        $articleService = $this->get($this->articleServiceName);
 
-        $pagerfanta = new Pagerfanta(new SimpleDoctrineORMAdapter($blog->getFindByCategoryQuery()));
-        $pagerfanta->setMaxPerPage($blog->getArticlesPerPage());
+        $pagerfanta = new Pagerfanta(new SimpleDoctrineORMAdapter($articleService->getFindByCategoryQuery()));
+        $pagerfanta->setMaxPerPage($articleService->getItemsCountPerPage());
 
         try {
             $pagerfanta->setCurrentPage($page);
         } catch (NotValidCurrentPageException $e) {
-            return $this->redirect($this->generateUrl('smart_blog_index'));
+            return $this->redirect($this->generateUrl($this->routeIndex));
         }
 
-        return $this->render('SmartBlogBundle::articles.html.twig', [
+        return $this->render($this->bundleName . ':Article:list.html.twig', [
             'pagerfanta' => $pagerfanta,
         ]);
     }
 
     /**
      * @param Request $request
-     * @param integer $id
+     * @param int $id
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     *
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
     public function editAction(Request $request, $id)
     {
-        $article = $this->get('smart_blog')->getArticle($id);
+        /** @var \SmartCore\Bundle\BlogBundle\Service\ArticleService $articleService */
+        $articleService = $this->get($this->articleServiceName);
+
+        $article = $articleService->get($id);
+
+        if (null === $article) {
+            throw $this->createNotFoundException();
+        }
 
         $form = $this->createForm(new ArticleFormType(get_class($article)), $article);
         if ($request->isMethod('POST')) {
@@ -60,17 +117,43 @@ class ArticleController extends Controller
 
             if ($form->isValid()) {
                 $article = $form->getData();
+                $article->setUpdated(); // @todo убрать в сервис.
 
-                /** @var \Doctrine\ORM\EntityManager $em */
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($article);
-                $em->flush();
+                $articleService->update($article);
 
-                return $this->redirect($this->generateUrl('smart_blog_article', ['slug' => $article->getSlug()] ));
+                return $this->redirect($this->generateUrl($this->routeArticle, ['slug' => $article->getSlug()] ));
             }
         }
 
-        return $this->render('SmartBlogBundle::article_edit.html.twig', [
+        return $this->render($this->bundleName . ':Article:edit.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     */
+    public function createAction(Request $request)
+    {
+        /** @var \SmartCore\Bundle\BlogBundle\Service\ArticleService $articleService */
+        $articleService = $this->get($this->articleServiceName);
+
+        $article = $articleService->create();
+
+        $form = $this->createForm(new ArticleFormType(get_class($article)), $article);
+        if ($request->isMethod('POST')) {
+            $form->submit($request);
+
+            if ($form->isValid()) {
+                $article = $form->getData();
+                $articleService->update($article);
+
+                return $this->redirect($this->generateUrl($this->routeArticle, ['slug' => $article->getSlug()] ));
+            }
+        }
+
+        return $this->render($this->bundleName . ':Article:create.html.twig', [
             'form' => $form->createView(),
         ]);
     }

@@ -1,0 +1,25 @@
+tdt_news_index:
+    path: /
+    defaults: { _controller: TDTNewsBundle:Article:page }
+
+tdt_news_article:
+    path: /{slug}.html
+    defaults: { _controller: TDTNewsBundle:Article:show }
+
+tdt_news_article_create:
+    path: /create/
+    defaults: { _controller: TDTNewsBundle:Article:create }
+
+tdt_news_article_edit:
+    path: /edit/{id}/
+    defaults: { _controller: TDTNewsBundle:Article:edit }
+    requirements:
+        id: \d+
+
+tdt_news_page_index:
+    path: /page/
+    defaults: { _controller: TDTNewsBundle:Article:page }
+
+tdt_news_page:
+    path: /page/{page}/
+    defaults: { _controller: TDTNewsBundle:Article:page }

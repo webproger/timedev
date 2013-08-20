@@ -1,0 +1,20 @@
+{% extends '@TDTNews/layout.html.twig' %}
+
+{% block html_head_title %} {{ article.title }} &raquo; {{ parent() }} {% endblock html_head_title %}
+
+{% block smart_blog_content %}
+
+    <h2>{{ article.title }}</h2>
+
+    <p><i class="icon-calendar"></i> {{ article.createdAt | localizeddate('full') }}</p>
+
+    <p>{{ article.annotation }}</p>
+
+    <p>{{ article.text }}</p>
+
+    {% if is_granted('ROLE_NEWSMAKER') %}
+        <hr />
+        <a href="{{ path('tdt_news_article_edit', {'id': article.id}) }}" class="btn">Редактирование</a>
+    {% endif %}
+
+{% endblock smart_blog_content %}

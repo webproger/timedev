@@ -1,15 +1,31 @@
 smart_media:
     resource: "@SmartMediaBundle/Resources/config/routing.yml"
-    prefix:   /
 
 tdt_site:
     resource: "@TDTSiteBundle/Resources/config/routing.yml"
-    prefix:   /
+
+smart_blog_admin_article:
+    resource: "@SmartBlogBundle/Resources/config/routing_admin_article.yml"
+    prefix:   /admin/blog/article/
+
+smart_blog_admin_category:
+    resource: "@SmartBlogBundle/Resources/config/routing_admin_category.yml"
+    prefix:   /admin/blog/category/
+
+smart_blog_admin_tag:
+    resource: "@SmartBlogBundle/Resources/config/routing_admin_tag.yml"
+    prefix:   /admin/blog/tag/
 
 tdt_blog:
     resource: "@TDTBlogBundle/Resources/config/routing.yml"
     prefix:   /blog/
 
+tdt_news:
+    resource: "@TDTNewsBundle/Resources/config/routing.yml"
+    prefix:   /news/
+
 tdt_user:
     resource: "@TDTUserBundle/Resources/config/routing.yml"
-    prefix:   /
+
+elfinder:
+    resource: "@FMElfinderBundle/Resources/config/routing.yml"
