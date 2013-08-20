@@ -1,8 +1,8 @@
 {
-    "name": "dmitxe/blog",
+    "name": "timedev-team/site",
     "license": "MIT",
     "type": "project",
-    "description": "Dmitry Xe's Personal Site",
+    "description": "TimeDev Team Official Site",
     "autoload": {
         "psr-0": { "": "src/" }
     },

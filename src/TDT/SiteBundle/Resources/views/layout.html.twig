@@ -1,6 +1,6 @@
 {% extends '@Html/base.html.twig' %}
 
-{% block html_head_title %}{{ parent() }} Dmitry Xe's Personal Site {% endblock html_head_title %}
+{% block html_head_title %}{{ parent() }} TimeDev Team {% endblock html_head_title %}
 
 {% block html_head_meta %}{{ parent() }}
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -38,7 +38,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </a>
-                <a class="brand" href="{{ path('tdt_site_index') }}">Dmitry Xe</a>
+                <a class="brand" href="{{ path('tdt_site_index') }}">TimeDev</a>
                 <div class="nav-collapse">
 
                     {{ knp_menu_render('TDTSiteBundle:SiteMenu:main', {
