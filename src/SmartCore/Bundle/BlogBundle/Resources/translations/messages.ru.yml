@@ -16,6 +16,7 @@ Description: Описание
 Delete: Удалить
 Edit article: Редактирование статьи
 Edit tag: Редактирование тега
+Edit category: Редактирование категории
 Exit: Выход
 Is active: Включено
 Items count: Кол-во записей
@@ -26,6 +27,10 @@ Name: Имя
 Permissions: Права доступа
 Position: Позиция
 Reports: Отчеты
+Smart blog article create: Создать статью
+Smart blog article edit: Редактирование статьи
+Smart blog tag create: Создать тэг
+Smart blog category create: Создать категорию
 Save: Сохранить
 Slug: Часть URI
 Tag: Тэг

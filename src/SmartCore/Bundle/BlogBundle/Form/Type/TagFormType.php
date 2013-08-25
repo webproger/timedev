@@ -23,7 +23,6 @@ class TagFormType extends AbstractType
             ->add('title')
             ->add('slug')
         ;
-
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

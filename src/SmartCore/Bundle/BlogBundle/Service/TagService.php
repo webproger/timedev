@@ -2,17 +2,23 @@
 
 namespace SmartCore\Bundle\BlogBundle\Service;
 
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use SmartCore\Bundle\BlogBundle\Event\FilterTagEvent;
 use SmartCore\Bundle\BlogBundle\Model\TagInterface;
 use SmartCore\Bundle\BlogBundle\Repository\ArticleRepositoryInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Routing\RouterInterface;
 use SmartCore\Bundle\BlogBundle\SmartBlogEvents;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Zend\Tag\Cloud;
 
 class TagService extends AbstractBlogService
 {
+    /**
+     * @var EntityManager
+     */
+    protected $em;
+
     /**
      * @var RouterInterface
      */
@@ -24,15 +30,26 @@ class TagService extends AbstractBlogService
     protected $tagsRepo;
 
     /**
-     * @param \SmartCore\Bundle\BlogBundle\Repository\ArticleRepository $articlesRepo
-     * @param \SmartCore\Bundle\BlogBundle\Repository\TagRepository $tagsRepo
+     * @param EntityManager $em
+     * @param ArticleRepositoryInterface $articlesRepo
+     * @param EntityRepository $tagsRepo
+     * @param EventDispatcherInterface $eventDispatcher
+     * @param RouterInterface $router
      * @param int $itemsPerPage
      */
-    public function __construct(ArticleRepositoryInterface $articlesRepo, EntityRepository $tagsRepo, RouterInterface $router, $itemsPerPage = 10)
+    public function __construct(
+        EntityManager $em,
+        ArticleRepositoryInterface $articlesRepo,
+        EntityRepository $tagsRepo,
+        EventDispatcherInterface $eventDispatcher,
+        RouterInterface $router,
+        $itemsPerPage = 10)
     {
-        $this->articlesRepo = $articlesRepo;
-        $this->router       = $router;
-        $this->tagsRepo     = $tagsRepo;
+        $this->articlesRepo     = $articlesRepo;
+        $this->em               = $em;
+        $this->eventDispatcher  = $eventDispatcher;
+        $this->router           = $router;
+        $this->tagsRepo         = $tagsRepo;
         $this->setItemsCountPerPage($itemsPerPage);
     }
 
@@ -155,7 +172,7 @@ class TagService extends AbstractBlogService
     {
         $class = $this->tagsRepo->getClassName();
 
-        $tag = new $class('slug');
+        $tag = new $class('');
 
         $event = new FilterTagEvent($tag);
         $this->eventDispatcher->dispatch(SmartBlogEvents::TAG_CREATE, $event);
@@ -170,7 +187,7 @@ class TagService extends AbstractBlogService
      */
     public function update(TagInterface $tag)
     {
-        $event = new FilterArticleEvent($tag);
+        $event = new FilterTagEvent($tag);
         $this->eventDispatcher->dispatch(SmartBlogEvents::TAG_PRE_UPDATE, $event);
 
         // @todo убрать в мэнеджер.
@@ -181,4 +198,11 @@ class TagService extends AbstractBlogService
         $this->eventDispatcher->dispatch(SmartBlogEvents::TAG_POST_UPDATE, $event);
     }
 
+    /**
+     * @return \Doctrine\ORM\Query
+     */
+    public function getFindAllQuery()
+    {
+        return $this->tagsRepo->getFindAllQuery();
+    }
 }

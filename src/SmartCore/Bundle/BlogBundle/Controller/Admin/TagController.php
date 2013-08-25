@@ -4,11 +4,12 @@ namespace SmartCore\Bundle\BlogBundle\Controller\Admin;
 
 use Pagerfanta\Exception\NotValidCurrentPageException;
 use Pagerfanta\Pagerfanta;
+use SmartCore\Bundle\BlogBundle\Form\Type\TagCreateFormType;
+use SmartCore\Bundle\BlogBundle\Form\Type\TagFormType;
 use SmartCore\Bundle\BlogBundle\Pagerfanta\SimpleDoctrineORMAdapter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use SmartCore\Bundle\BlogBundle\Form\Type\TagFormType;
 use Zend\Tag\Cloud;
 
 class TagController extends Controller
@@ -54,27 +55,37 @@ class TagController extends Controller
     }
 
     /**
+     * @param Request $request
      * @return Response
      */
-    public function indexAction(Request $requst)
+    public function indexAction(Request $request)
     {
         /** @var \SmartCore\Bundle\BlogBundle\Service\TagService $tagService */
         $tagService = $this->get($this->tagServiceName);
+        $tag = $tagService->create();
 
-        $pagerfanta = new Pagerfanta(new SimpleDoctrineORMAdapter($tagService->getCloud($this->routeAdminTag)));
+        $form = $this->createForm(new TagCreateFormType(get_class($tag)), $tag);
+        if ($request->isMethod('POST')) {
+            $form->handleRequest($request);
+
+            if ($form->isValid()) {
+                $tagService->update($tag);
+
+                return $this->redirect($this->generateUrl($this->routeAdminTag));
+            }
+        }
+
+        $pagerfanta = new Pagerfanta(new SimpleDoctrineORMAdapter($tagService->getFindAllQuery()));
         $pagerfanta->setMaxPerPage($tagService->getItemsCountPerPage());
 
- //       ld($pagerfanta->getMaxPerPage());
-
         try {
-            $pagerfanta->setCurrentPage($requst->query->get('page', 1));
+            $pagerfanta->setCurrentPage($request->query->get('page', 1));
         } catch (NotValidCurrentPageException $e) {
             return $this->redirect($this->generateUrl($this->routeAdminTag));
         }
 
-//        'cloud' => $tagService->getCloud($this->routeTag),
         return $this->render($this->bundleName . ':Admin/Tag:list.html.twig', [
-            'tags' => $tagService->getCloud($this->routeAdminTag),
+            'form'       => $form->createView(),
             'pagerfanta' => $pagerfanta,
         ]);
     }
@@ -99,8 +110,6 @@ class TagController extends Controller
             $form->submit($request);
 
             if ($form->isValid()) {
-                $tag = $form->getData();
-
                 /** @var \Doctrine\ORM\EntityManager $em */
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($tag);
@@ -111,36 +120,6 @@ class TagController extends Controller
         }
 
         return $this->render($this->bundleName . ':Admin/Tag:edit.html.twig', [
-            'form' => $form->createView(),
-        ]);
-    }
-
-    /**
-     * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
-     */
-    public function createAction(Request $request)
-    {
-        /** @var \SmartCore\Bundle\BlogBundle\Model\TagInterface $tag */
-        $tag = $this->get($this->tagServiceName)->create();
-
-        $form = $this->createForm(new TagFormType(get_class($tag)), $tag);
-        if ($request->isMethod('POST')) {
-            $form->submit($request);
-
-            if ($form->isValid()) {
-                $tag = $form->getData();
-
-                /** @var \Doctrine\ORM\EntityManager $em */
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($tag);
-                $em->flush();
-
-                return $this->redirect($this->generateUrl($this->routeAdminTag));
-            }
-        }
-
-        return $this->render($this->bundleName . ':Admin/Tag:create.html.twig', [
             'form' => $form->createView(),
         ]);
     }

@@ -1,4 +1,5 @@
 parameters:
+#    tdt_site.example.class: TDT\SiteBundle\Example
 
 services:
     # Menu selected items

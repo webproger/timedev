@@ -10,4 +10,14 @@ class PageController extends Controller
     {
         return $this->render('TDTSiteBundle:Page:index.html.twig');
     }
+
+    public function aboutAction()
+    {
+        return $this->render('TDTSiteBundle:Page:about.html.twig');
+    }
+
+    public function contactsAction()
+    {
+        return $this->render('TDTSiteBundle:Page:contacts.html.twig');
+    }
 }
