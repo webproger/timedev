@@ -1,3 +1,0 @@
-tdt_demo_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: TDTDemoBundle:Default:index }

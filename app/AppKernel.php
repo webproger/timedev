@@ -46,7 +46,6 @@ class AppKernel extends Kernel
             new TDT\UserBundle\TDTUserBundle(),
             new TDT\BlogBundle\TDTBlogBundle(),
             new TDT\FixturesBundle\TDTFixturesBundle(),
-            new TDT\DemoBundle\TDTDemoBundle(),
             new TDT\NewsBundle\TDTNewsBundle(),
             new TDT\GalleryBundle\TDTGalleryBundle(),
             new TDT\CommentBundle\TDTCommentBundle(),

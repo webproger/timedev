@@ -4,9 +4,6 @@ fos_comment_api:
     prefix: /api
     defaults: { _format: html }
 
-tdt_demo:
-    resource: "@TDTDemoBundle/Resources/config/routing.yml"
-
 smart_media:
     resource: "@SmartMediaBundle/Resources/config/routing.yml"
 
