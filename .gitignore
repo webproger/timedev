@@ -16,3 +16,4 @@
 !*.gitkeep
 !*.gitignore
 *.php~
+purge_db

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <title>TimeDev</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link href="../assets/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <style type="text/css">
+        body { padding-top: 60px; padding-bottom: 40px; }
+    </style>
+    <!--<link href="../assets/bootstrap/3.0.0/css/bootstrap-theme.min.css" rel="stylesheet">-->
+
+    <!-- @todo сделать фавиконки.
+    <link rel="shortcut icon" href="http://twitter.github.com/bootstrap/assets/images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="http://twitter.github.com/bootstrap/assets/images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="http://twitter.github.com/bootstrap/assets/images/apple-touch-icon-114x114.png">
+    -->
+</head>
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+        	<div class="navbar-header">
+    		    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+    		      <span class="sr-only">Toggle navigation</span>
+    		      <span class="icon-bar"></span>
+    		      <span class="icon-bar"></span>
+    		      <span class="icon-bar"></span>
+    		    </button>
+    		    <a class="navbar-brand" href="#">TimeDev</a>
+      		</div>
+
+    		<div class="collapse navbar-collapse navbar-ex1-collapse">
+    			<ul class="nav navbar-nav">
+    			  <li class="active"><a href="#">Главная</a></li>
+    			  <li><a href="#">Форум</a></li>
+    			  <li><a href="#">Трекер</a></li>
+    			  <li class="dropdown">
+    			    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Записи <b class="caret"></b></a>
+    			    <ul class="dropdown-menu">
+    			      <li><a href="#">Тематика #1</a></li>
+    			      <li><a href="#">Тематика #2</a></li>
+    			      <li><a href="#">Тематика #3</a></li>
+    			    </ul>
+    			  </li>
+    			</ul>
+    			<ul class="nav navbar-nav navbar-right">
+    			  <li><a href="#">Зарегистрироваться</a></li>
+    			  <li class="dropdown">
+    			    <a id="login-dropdown" href="#" class="dropdown-toggle" data-toggle="dropdown">Войти <b class="caret"></b></a>
+    			    <div class="dropdown-menu" style="padding: 15px; padding-bottom: 0px;">
+    		            <form class="form-horizontal" role="form">
+    						<div class="form-group">
+    							<div class="col-lg-12">
+    							  <input id="login" type="text" class="form-control" placeholder="Логин" name="login">
+    							</div>
+    						</div>
+    						<div class="form-group">
+    							<div class="col-lg-12">
+    							  <input type="password" class="form-control" placeholder="Пароль" name="password">
+    							</div>
+    						</div>
+    						<div class="form-group">
+    							<div class="col-lg-12">
+    								<div class="checkbox">
+    							        <label>
+    							          <input type="checkbox"> Запомнить
+    							        </label>
+    						    	</div>
+    							</div>
+    						</div>
+    						<div class="form-group">
+    							<div class="col-lg-12">
+    								<button type="submit" class="btn btn-default form-control">Войти</button>
+    							</div>
+    						</div>
+    					</form>
+    	        	</div>
+    			  </li>
+    			</ul>
+			</div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+            	<div class="page-header"> 
+                	<h2>Последние записи</h2>
+            	</div>
+
+                <div class="container" style="border: 1px solid #e3e3e3; border-radius: 5px; margin-bottom: 10px;">
+                    <a href="#"><h3>Срыв покровов</h3></a>
+                    <hr style="margin-top: 0px">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <a href="#" class="thumbnail">
+                                <img alt="260x180" src="http://farm8.staticflickr.com/7163/6806922559_b3d24f2d8d_m.jpg"/>
+                            </a>
+                        </div>
+                        <div class="col-md-9">
+                            <span>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                            </span>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row container">
+                        <div class="col-md-10">
+                        	<p>
+                                Теги: 
+                                <a href="#"><span class="label label-info">горячее</span></a> 
+                                <a href="#"><span class="label label-info">треш</span></a> 
+                                <a href="#"><span class="label label-info">php</span></a> 
+                                <a href="#"><span class="label label-info">котики</span></a>
+                                | <span class="glyphicon glyphicon-user"></span> <a href="#">User</a> 
+                                | <span class="glyphicon glyphicon-calendar"></span> 25.07.13 в 17:46
+                                | <span class="glyphicon glyphicon-comment"></span> <a href="#">3 комментария</a>
+                            </p>
+                        </div>
+                        <div class="col-md-2 text-right">
+                        	<p>
+                        		<a href="#" class="btn btn-primary btn-sm">Подробно&nbsp;&raquo;</a>
+                        	</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container" style="border: 1px solid #e3e3e3; border-radius: 5px; margin-bottom: 10px;">
+                    <a href="#"><h3>Срыв покровов</h3></a>
+                    <hr style="margin-top: 0px">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <a href="#" class="thumbnail">
+                                <img alt="260x180" src="http://farm8.staticflickr.com/7163/6806922559_b3d24f2d8d_m.jpg"/>
+                            </a>
+                        </div>
+                        <div class="col-md-9">
+                            <span>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                            </span>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row container">
+                        <div class="col-md-10">
+                        	<p>
+                        		Теги: 
+	                            <a href="#"><span class="label label-info">горячее</span></a> 
+	                            <a href="#"><span class="label label-info">треш</span></a> 
+	                            <a href="#"><span class="label label-info">php</span></a> 
+	                            <a href="#"><span class="label label-info">котики</span></a>
+	                            | <span class="glyphicon glyphicon-user"></span> <a href="#">User</a> 
+	                            | <span class="glyphicon glyphicon-calendar"></span> 25.07.13 в 17:46
+	                            | <span class="glyphicon glyphicon-comment"></span> <a href="#">3 комментария</a>
+	                        </p>
+                        </div>
+                        <div class="col-md-2 text-right">
+                        	<p>
+                        		<a href="#" class="btn btn-primary btn-sm">Подробно&nbsp;&raquo;</a>
+                        	</p>
+                        </div>
+                    </div>
+                </div>
+
+				<div class="text-center">
+	            	<ul class="pagination">
+						<li class="disabled"><a href="#">&laquo;</a></li>
+						<li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+						<li><a href="#">2</a></li>
+						<li><a href="#">3</a></li>
+						<li><a href="#">4</a></li>
+						<li><a href="#">5</a></li>
+						<li><a href="#">&raquo;</a></li>
+					</ul>
+				</div>
+            </div>
+            
+            <div class="col-md-4">
+                <div>
+                    <h2>Heading</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    <p><a class="btn" href="#">Подробно&nbsp;&raquo;</a></p>
+                </div>
+                <div>
+                    <h2>Heading</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    <p><a class="btn" href="#">Подробно&nbsp;&raquo;</a></p>
+                </div>
+                <div>
+                    <h2>Heading</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    <p><a class="btn" href="#">Подробно&nbsp;&raquo;</a></p>
+                </div>
+            </div>
+        </div>
+    </div> 
+    <hr />
+    <div class="text-center">
+        <span>TimeDev © 2013</span>
+    </div>
+
+    <script src="../assets/jquery/1.10.2/jquery.min.js"></script>
+    <script src="../assets/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script>
+        $(function() {
+            $('#login-dropdown').click(function(e) {
+                setTimeout(function() {
+                    $("#login").focus();
+                }, 1);
+            });
+        });
+    </script>
+</body>
+</html>

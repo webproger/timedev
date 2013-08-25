@@ -1,0 +1,19 @@
+{% extends '@TDTSite/Admin/index.html.twig' %}
+
+{% block html_head_title %} {{ 'Admin'|trans }} &raquo; {{ parent() }} {% endblock html_head_title %}
+
+{% block content %}
+    {{ parent() }}
+    <div id="content" class="span12">
+        <div class="content">
+
+            {{ knp_menu_render('SmartBlogBundle:AdminMenu:main', {
+                    'currentClass': 'active',
+                    'clear_matcher': false,
+                })
+            }}
+
+            {% block smart_blog_content %}{% endblock %}
+        </div>
+    </div>
+{% endblock %}

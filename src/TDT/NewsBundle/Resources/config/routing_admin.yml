@@ -1,0 +1,13 @@
+tdt_news_admin_index:
+    path: /
+    defaults: { _controller: TDTNewsBundle:Admin/Article:index }
+
+tdt_news_admin_create:
+    path: /create/
+    defaults: { _controller: TDTNewsBundle:Admin/Article:create }
+
+tdt_news_admin_edit:
+    path: /{id}/
+    defaults: { _controller: TDTNewsBundle:Admin/Article:edit }
+    requirements:
+        id: \d+
