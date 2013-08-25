@@ -16,9 +16,12 @@ class SiteMenu extends ContainerAware
     {
         $menu = $factory->createItem('site_main');
         $menu->setChildrenAttribute('class', isset($options['class']) ? $options['class'] : 'nav');
-        $menu->addChild('Homepage', ['route' => 'tdt_site_index']);
+        $menu->addChild('Главная',     ['route' => 'tdt_site_index']);
+        $menu->addChild('О сайте',     ['route' => 'tdt_site_about']);
+        $menu->addChild('Контакты',     ['route' => 'tdt_site_contacts']);
         $menu->addChild('Blog',     ['route' => 'smart_blog_index']);
         $menu->addChild('News',     ['route' => 'tdt_news_index']);
+        $menu->addChild('Gallery',  ['route' => 'smart_gallery_index']);
 
         if (true === $this->container->get('security.context')->isGranted('ROLE_BLOGGER')) {
             $menu->addChild('Create Article', ['route' => 'smart_blog_article_create']);

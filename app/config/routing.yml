@@ -1,3 +1,9 @@
+fos_comment_api:
+    type: rest
+    resource: "@FOSCommentBundle/Resources/config/routing.yml"
+    prefix: /api
+    defaults: { _format: html }
+
 smart_media:
     resource: "@SmartMediaBundle/Resources/config/routing.yml"
 
@@ -16,6 +22,10 @@ smart_blog_admin_tag:
     resource: "@SmartBlogBundle/Resources/config/routing_admin_tag.yml"
     prefix:   /admin/blog/tag/
 
+smart_texter:
+    resource: "@SmartTexterBundle/Resources/config/routing_admin.yml"
+    prefix:   /admin/texter/
+
 tdt_blog:
     resource: "@TDTBlogBundle/Resources/config/routing.yml"
     prefix:   /blog/
@@ -23,6 +33,14 @@ tdt_blog:
 tdt_news:
     resource: "@TDTNewsBundle/Resources/config/routing.yml"
     prefix:   /news/
+
+tdt_news_admin:
+    resource: "@TDTNewsBundle/Resources/config/routing_admin.yml"
+    prefix:   /admin/news/
+
+smart_gallery:
+    resource: "@SmartGalleryBundle/Resources/config/routing.yml"
+    prefix:   /gallery/
 
 tdt_user:
     resource: "@TDTUserBundle/Resources/config/routing.yml"

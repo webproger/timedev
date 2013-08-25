@@ -1,0 +1,14 @@
+{% extends '@TDTSite/layout.html.twig' %}
+
+{% block content %}
+
+    {{ knp_menu_render('TDTSiteBundle:AdminMenu:main', {
+            'currentClass': 'active',
+            'clear_matcher': false,
+        })
+    }}
+
+    {% block admin_content %}
+    {% endblock admin_content %}
+
+{% endblock content %}

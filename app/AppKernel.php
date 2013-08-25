@@ -24,6 +24,7 @@ class AppKernel extends Kernel
             new Mopa\Bundle\BootstrapBundle\MopaBootstrapBundle(),
             new Knp\Bundle\GaufretteBundle\KnpGaufretteBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
+            new Liip\DoctrineCacheBundle\LiipDoctrineCacheBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Ornicar\GravatarBundle\OrnicarGravatarBundle(),
             new Avalanche\Bundle\ImagineBundle\AvalancheImagineBundle(),
@@ -34,15 +35,23 @@ class AppKernel extends Kernel
             new FM\ElfinderBundle\FMElfinderBundle(),
             new SmartCore\Bundle\HtmlBundle\HtmlBundle(),
             new SmartCore\Bundle\BlogBundle\SmartBlogBundle(),
+            new SmartCore\Bundle\MediaBundle\SmartMediaBundle(),
+            new SmartCore\Bundle\GalleryBundle\SmartGalleryBundle(),
+            new SmartCore\Bundle\TexterBundle\SmartTexterBundle(),
+            new JMS\SerializerBundle\JMSSerializerBundle($this),
+            new FOS\RestBundle\FOSRestBundle(),
+            new FOS\CommentBundle\FOSCommentBundle(),
+
             new TDT\SiteBundle\TDTSiteBundle(),
             new TDT\UserBundle\TDTUserBundle(),
             new TDT\BlogBundle\TDTBlogBundle(),
             new TDT\FixturesBundle\TDTFixturesBundle(),
-            new SmartCore\Bundle\MediaBundle\SmartMediaBundle(),
             new TDT\NewsBundle\TDTNewsBundle(),
+            new TDT\GalleryBundle\TDTGalleryBundle(),
+            new TDT\CommentBundle\TDTCommentBundle(),
         );
 
-        if (in_array($this->getEnvironment(), array('dev', 'test'))) {
+        if (in_array($this->getEnvironment(), ['dev'])) {
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
             $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
             $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
@@ -50,6 +59,11 @@ class AppKernel extends Kernel
             $bundles[] = new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle();
             $bundles[] = new Elao\WebProfilerExtraBundle\WebProfilerExtraBundle();
             $bundles[] = new JMS\DebuggingBundle\JMSDebuggingBundle($this); //"jms/debugging-bundle": "dev-master",
+        }
+
+        if (in_array($this->getEnvironment(), ['test'])) {
+            $bundles[] = new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle();
+            $bundles[] = new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle();
         }
 
         return $bundles;
@@ -62,7 +76,7 @@ class AppKernel extends Kernel
 
     protected function getContainerBaseClass()
     {
-        if (in_array($this->getEnvironment(), array('dev', 'test'))) {
+        if (in_array($this->getEnvironment(), ['dev'])) {
             return '\JMS\DebuggingBundle\DependencyInjection\TraceableContainer';
         }
 
@@ -79,4 +93,3 @@ class AppKernel extends Kernel
         return $this->rootDir.'/../var/logs';
     }
 }
-
