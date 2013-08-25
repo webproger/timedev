@@ -63,6 +63,12 @@
         </div>
 
         <div class="row">
+            <div class="span9">
+                <div id="mst_content">
+                    {% block content %}
+                    {% endblock content %}
+                </div>
+            </div>
             {% block sidebar %}
                 <div id="sidebar" class="span3">
                     <div class="portlet">
@@ -81,10 +87,11 @@
                         </div>
                         <div class="portlet-content">
                             <ul class="nav nav-tabs nav-stacked">
-                                <li><a href="#">Разработка &laquo;Бандла&raquo; для распределённого хранения файлов.</a></li>
-                                <li><a href="{{ path("tdt_site_contacts") }}">Форма обратной связи.</a></li>
-                                <li><a href="#">Возможность управлять тэгами и категориями блога админу сайта.</a></li>
-                                <li><a href="#">Фабрики для форм блога.</a></li>
+                                <ul>
+                                    <li>Разработка &laquo;Бандла&raquo; для распределённого хранения файлов.</li>
+                                    <li>Форма обратной связи для желающих вступить в группу.</li>
+                                    <li>Начать цикл статей для начинающих.</li>
+                                </ul>
                             </ul>
                         </div>
 
@@ -102,12 +109,7 @@
                 </div>
             {% endblock sidebar %}
 
-            <div class="span9">
-                <div id="mst_content">
-                    {% block content %}
-                    {% endblock content %}
-                </div>
-            </div>
+
         </div>
 
         <div class="row">
