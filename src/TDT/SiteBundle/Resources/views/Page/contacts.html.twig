@@ -2,5 +2,36 @@
 
 {% block content %}
     {{ parent() }}
-   <p>Здесь будет форма обратной связи</p>
+   {#<p>Здесь будет форма обратной связи</p>#}
+    <h4>Skype:</h4>
+    <h4>E-mail:</h4>
+    <h4>ICQ:</h4>
+    <h4>Jabber:</h4>
+
+    <a href="#message-modal" role="button" class="btn" data-toggle="modal">Напишите нам</a>
+
+    {#  модальное окно #}
+    <div id="message-modal" class="modal hide fade">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h2>Свяжитесь с нами</h2>
+        </div>
+        <div>
+            <form>
+                <label for="name">Имя</label>
+                <input id="name" type="text" required="required" />
+                <label for="email">E-mail</label>
+                <input id="email" type="email" required="required" />
+                <label for="message">Сообщение</label>
+                <textarea id="message" rows="5" cols="150" required="required"></textarea>
+                <br />
+
+                <button id="submit" type="submit" class="btn btn-info">
+                    <i class="icon-envelope icon-white"></i>
+                    Отправить
+                </button>
+            </form>
+        </div>
+    </div>
+
 {% endblock content %}

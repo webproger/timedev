@@ -219,3 +219,25 @@ body {
 .form input {
     width: auto;
 }
+
+/* форма обратной связи
+=========================*/
+#message-modal {
+    text-align: center;
+}
+
+#message-modal > div {
+    width: inherit;
+    max-width: 80%;
+    display: inline-block;
+    margin-top: 50px;
+}
+
+#message-modal > div > form {
+    text-align: left;
+}
+
+#message-modal > div > form > button {
+    float: right;
+    margin-bottom: 50px;
+}

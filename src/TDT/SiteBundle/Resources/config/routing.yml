@@ -13,3 +13,7 @@ tdt_site_about:
 tdt_site_contacts:
     path: /contacts/
     defaults: { _controller: TDTSiteBundle:Page:contacts }
+
+tdt_site_mail:
+    path: /send_mail/
+    defaults: { _controller: TDTSiteBundle:Page:mail }
